@@ -5,7 +5,7 @@ public class Access {
 	private int access_number;
 	private String access_name;
 	private int access_declare_count;
-	private int access_aueDate;
+	private int access_dueDate;
 
 	public Access() {
 
@@ -35,12 +35,12 @@ public class Access {
 		this.access_declare_count = access_declare_count;
 	}
 
-	public int getAccess_aueDate() {
-		return access_aueDate;
+	public int getAccess_dueDate() {
+		return access_dueDate;
 	}
 
-	public void setAccess_aueDate(int access_aueDate) {
-		this.access_aueDate = access_aueDate;
+	public void setAccess_aueDate(int access_dueDate) {
+		this.access_dueDate = access_dueDate;
 	}
 
 }

@@ -5,8 +5,8 @@ public class AttachedPhoto {
 	private int photo_number;
 	private String path;
 	private int board_number;
-	private int board_type_number;
 	private int buyTogether_number;
+	private int board_type_number;
 
 	public AttachedPhoto() {
 
@@ -35,6 +35,14 @@ public class AttachedPhoto {
 	public void setBoard_number(int board_number) {
 		this.board_number = board_number;
 	}
+	
+	public int getBuyTogether_number() {
+		return buyTogether_number;
+	}
+
+	public void setBuyTogether_number(int buyTogether_number) {
+		this.buyTogether_number = buyTogether_number;
+	}
 
 	public int getBoard_type_number() {
 		return board_type_number;
@@ -42,14 +50,6 @@ public class AttachedPhoto {
 
 	public void setBoard_type_number(int board_type_number) {
 		this.board_type_number = board_type_number;
-	}
-
-	public int getBuyTogether_number() {
-		return buyTogether_number;
-	}
-
-	public void setBuyTogether_number(int buyTogether_number) {
-		this.buyTogether_number = buyTogether_number;
 	}
 
 }

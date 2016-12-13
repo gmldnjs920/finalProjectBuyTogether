@@ -2,7 +2,7 @@ package com.buy.together.domain;
 
 public class BuyTogetherAddress {
 
-	private int buyTogether_address;
+	private int buyTogether_address_number;
 	private double latitude;
 	private double longitude;
 	private String buyTogether_address_sido;
@@ -15,12 +15,12 @@ public class BuyTogetherAddress {
 
 	}
 
-	public int getBuyTogether_address() {
-		return buyTogether_address;
+	public int getBuyTogether_address_number() {
+		return buyTogether_address_number;
 	}
 
-	public void setBuyTogether_address(int buyTogether_address) {
-		this.buyTogether_address = buyTogether_address;
+	public void setBuyTogether_address_number(int buyTogether_address_number) {
+		this.buyTogether_address_number = buyTogether_address_number;
 	}
 
 	public double getLatitude() {
