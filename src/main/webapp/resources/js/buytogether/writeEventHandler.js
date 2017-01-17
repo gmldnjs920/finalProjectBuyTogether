@@ -1,5 +1,5 @@
 $('head').append('<script src=\'/resources/js/buytogether/buytogetherController.js\'><\/script>');
-var buytogetherAddress = {};
+var buytogether = {};
 
 function execDaumPostcode() {
 	
@@ -51,11 +51,11 @@ function execDaumPostcode() {
 					
 				}
 				
-				buytogetherAddress.buyTogether_address_sido = data.sido;
-				buytogetherAddress.buyTogether_address_sigungu = data.sigungu;
-				buytogetherAddress.buyTogether_address_road_address = data.roadAddress;
-				buytogetherAddress.longitude = longitude;
-				buytogetherAddress.latitude = latitude;
+				buytogether.buyTogether_address_sido = data.sido;
+				buytogether.buyTogether_address_sigungu = data.sigungu;
+				buytogether.buyTogether_address_road_address = data.roadAddress;
+				buytogether.longitude = longitude;
+				buytogether.latitude = latitude;
 			});
 		
 		}
@@ -76,22 +76,19 @@ function saveFunction() {
 	
 	var data = $('#tx_editor_form').serializeJSON();
 	
-	var buytogether = {
-			title : data.title,
-			content : data.content,
-			duedate : data.duedate,
-			joinin_number : data.joinin_number,
-			price : data.price,
-			category_number : data.category_number,
-			user_number : 1,
-			hunting_type_number : data.hunting_type_number,
-			path : data.files
-	};
-	
-	buytogetherAddress.buyTogether_address_detail = data.address_detail;
+	buytogether.title = data.title;
+	buytogether.content = data.content;
+	buytogether.duedate = data.duedate;
+	buytogether.join_number = data.join_number;
+	buytogether.price = data.price;
+	buytogether.category_number = data.category_number
+	buytogether.user_number = sessionStorage.getItem("number");
+	buytogether.hunting_type_number = data.hunting_type_number;
+	buytogether.path = data.files;
+	buytogether.buyTogether_address_detail = data.address_detail;
 	
 	var controller = new buytogetherController();
-	controller.requestSaveBuyTogether(buytogether, buytogetherAddress);
+	controller.requestSaveBuyTogether(buytogether);
 }
 
 $(document).ready(function (){
@@ -151,6 +148,7 @@ $(document).ready(function (){
 
 				controller.requestPhotoPath(formData);
 				count++;
+				
 			} else if(count > 4){
 
 				alert("사진은 4장까지만 첨부할 수 있어요");

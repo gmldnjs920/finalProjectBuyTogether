@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mappers.qnaMapper">
+
+	<!-- qna의 사진조회 -->
+	<select id="qnaPhotoList" resultType="attachedPhoto">
+		select *
+		from attachedphoto
+		where photo_number = #{photo_number}
+		order by photo_number desc
+	</select>
+
+	<!-- qna 목록 -->
+	<select id="qnaListAll" resultType="com.buy.together.dto.QnaDTO">		
+		<![CDATA[
+		select q.qna_number, q.qna_title, u.nickname, q.qna_writedate
+		from qna q, user u
+		where q.qna_number > 0 and q.user_number = u.user_number and u.user_number = #{user_number}
+		 ]]>
+		            
+      <![CDATA[
+      order by qna_number desc
+      limit #{pageStart}, #{perPageNum}
+      ]]>
+		 			
+	</select>
+			
+	<!-- qna 조회 -->
+	<select id="qnaListOne" resultType="com.buy.together.dto.QnaDTO">
+		select q.qna_number, q.qna_title, q.qna_content, u.nickname, q.qna_writedate
+		from qna q, user u
+		where qna_number = #{qna_number} and q.user_number = u.user_number
+	</select>
+	
+	<!-- qna 카운트 -->
+	<select id="searchQnaListCount" resultType="int">
+		<![CDATA[
+		select count(qna_number)
+		from qna
+		where qna_number > 0 and user_number = #{user_number}
+	]]>
+	</select>
+	
+	<!-- qna 삭제 -->
+	<delete id="qnaDelete">
+		delete 
+		from qna
+		where qna_number = #{qna_number}
+	</delete>
+
+	<!-- qna 수정 -->
+	<update id="qnaUpdate">
+		update qna q set q.qna_title = #{qna_title}, q.qna_content = #{qna_content}
+		where q.qna_number = #{qna_number}
+	</update>
+	
+	<!-- qna 등록 -->
+	<insert id="qnaInsert" >
+	
+		insert into qna(qna_title, qna_content, user_number)
+		values(#{qna_title}, #{qna_content}, #{user_number});
+
+	</insert>
+	
+	<!-- qna 수정 완료  -->
+	<update id="qnaDoneUpdate">
+		update qna 
+		set qna_title = #{qna_title}, qna_content = #{qna_content}
+		where qna_number = #{qna_number}
+	</update>
+	
+</mapper>

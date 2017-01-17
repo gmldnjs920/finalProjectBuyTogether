@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>같이사냥 | 계정 정보 찾기</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+<!---------------------공통스크립트--------------------->
+<link href="/resources/theme/css/components.css" id="style_components"
+	rel="stylesheet" type="text/css" />
+<link href="/resources/theme/css/default.css" rel="stylesheet"
+	id="style_theme" type="text/css" />
+<link href="/resources/theme/css/custom.css" rel="stylesheet"
+	type="text/css" />
+<link href="/resources/theme/plugin/animate.css" rel="stylesheet"
+	type="text/css" />
+<link href="/resources/theme/plugin/jquery.fancybox.css"
+	rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/plugins.css" rel="stylesheet"
+	type="text/css" />
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<script src="/resources/theme/js/app.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components-shop.js"
+	type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/NotoKRRegular.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="/resources/theme/font/simple-line-icons.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/font-awesome.css"
+	type="text/css">
+<script src="/resources/theme/js/jquery-migrate.min.js"
+	type="text/javascript"></script>
+<!-------------------------------------------------->
+<script>
+$(document).ready(function() {
+	
+	$("#buytogetherHeader").load("/views/include/header.html");
+	$("#buytogetherFooter").load("/views/include/footer.html");
+	
+});
+</script>
+</head>
+<!-- BEGIN: HEADER 시작-->
+<body
+	class="c-layout-header-fixed c-layout-header-mobile-fixed c-layout-header-topbar c-layout-header-topbar-collapse">
+	<!-- BEGIN: BODY 시작 -->
+	<div id=buytogetherHeader></div>
+	<div class="c-layout-body">
+		<!-- ooo body begin-->
+		<div class="container">
+			<div class="c-content-title">
+				<h1 class="c-center c-font-bold">계정 정보 찾기</h1>
+			</div>
+			<!-- findIdPw Body -->
+			<div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
+				<div class="c-content-tab-4 c-opt-3" role="tabpanel">
+					<ul class="nav nav-justified" role="tablist">
+						<li role="presentation" class="active"><a href="#tab-1"
+							role="tab" data-toggle="tab">아이디 찾기</a></li>
+						<li role="presentation"><a href="#tab-2" role="tab"
+							data-toggle="tab">비밀번호 찾기</a></li>
+					</ul>
+				</div>
+				<!-- findIdPw Tap Content -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane fade in active" id="tab-1">
+						<p class="help-block">가입 당시 입력한 정보를 통해 아이디를 찾을 수 있습니다.</p>
+						<div class="form-group has-feedback" id="divId">
+							<input type="text" class="form-control" name="name" id="nameID"
+								placeholder="이름">
+						</div>
+						<div class="form-group has-feedback" id="divEmail">
+							<input type="text" class="form-control" name="email" id="emailID"
+								placeholder="이메일"> <span
+								class="glyphicon glyphicon-envelope form-control-feedback"></span>
+						</div>
+						<div class="form-group has-feedback c-right">
+							<button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase"
+								id="findId">아이디 찾기</button>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="tab-2">
+						<p class="help-block">가입 당시 입력한 이메일로 임시 비밀번호를 발송합니다.</p>
+						<div class="form-group has-feedback" id="divName">
+							<input type="text" class="form-control" name="name" id="namePW"
+								placeholder="이름">
+						</div>
+						<div class="form-group has-feedback" id="divId">
+							<input type="text" class="form-control" name="id" id="idPW"
+								placeholder="아이디">
+						</div>
+						<div class="form-group has-feedback" id="divEmail">
+							<input type="text" class="form-control" name="email" id="emailPW"
+								placeholder="이메일"> <span
+								class="glyphicon glyphicon-envelope form-control-feedback"></span>
+						</div>
+						<div class="form-group has-feedback c-right">
+							<button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase"
+								id="findPassword">비밀번호 찾기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal -->
+      	<div class="modal fade bs-example-modal-md" id="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            	<div class="modal-dialog modal-md">
+                	<div class="modal-content">
+                      <div class="modal-body" id="modal-body">
+                        	<p class="c-font-red" id="msg">
+						<span class="c-font-15" id="modalContent"></span>
+					</p>
+                      </div>
+                      <div class="modal-footer">
+                      	<button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase" data-dismiss="modal">Close</button>
+                  	</div>
+              	</div>
+          	</div>
+   		</div>
+		<!-- END: BODY 끝 -->
+	</div>
+	<div class="c-layout-go2top">
+		<i class="icon-arrow-up"></i>
+	</div>
+	<!-- BEGIN: FOOTER 시작 -->
+	<div id=buytogetherFooter></div>
+	<!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
+
+	<!-- END: LAYOUT/FOOTERS/GO2TOP -->
+	<!-- BEGIN: LAYOUT/BASE/BOTTOM -->
+	<!-- BEGIN: CORE PLUGINS -->
+	<script src="/resources/bootstrap/js/bootstrap.js"
+		type="text/javascript"></script>
+	<script src="/resources/bootstrap/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<script src="/resources/js/user/findUserInfoEventHandler.js"
+		type="text/javascript"></script>
+	<!-- END: CORE PLUGINS -->
+	<!-- BEGIN: LAYOUT PLUGINS -->
+	<script src="/resources/bootstrap/js/bootstrap-slider.js"
+		type="text/javascript"></script>
+	<!-- END: LAYOUT PLUGINS -->
+	<!-- END: LAYOUT/BASE/BOTTOM -->
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>같이사냥 | 내 사냥 목록</title>
+ 
+<!---------------------공통스크립트--------------------->
+<link rel="shortcut icon" href="/resources/theme/css/favicon.ico" type="image/x-icon"/> 
+
+<link href="/resources/theme/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+<link href="/resources/theme/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/animate.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/plugins.css" rel="stylesheet" type="text/css" />
+<script src="/resources/theme/js/app.js" type="text/javascript"></script>
+<!-- <script src="/resources/theme/js/components.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components-shop.js" type="text/javascript"></script> -->
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/NotoKRRegular.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/simple-line-icons.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/font-awesome.css" type="text/css">
+<link rel="shortcut icon" href="/resources/theme/css/favicon.ico" type="image/x-icon"/>
+<!--------------------페이지 설정------------------------------>
+
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<script src="/resources/bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/bootstrap-3.3.7-dist/css/bootstrap.css">
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+<script src="/resources/bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	
+<!--  핸들바를 쓰기 위한 스크립트!!! -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<!-- 장고관련 스크립트 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta content="" name="description" />
+<meta content="" name="author" />
+
+<script>
+$(document).ready(function() {
+	
+	$("#buytogetherHeader").load("/views/include/header.html");
+	$("#buytogetherFooter").load("/views/include/footer.html");
+	
+});
+</script>
+<script src="/resources/js/mybuytogether/myBuyTogetherEventHandler.js"></script>
+
+</head>
+
+<body class="c-layout-header-fixed c-layout-header-mobile-fixed">
+	<div id="buytogetherHeader"></div>
+	<div class="c-layout-body">
+		<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+         <div class="container c-content-title-1">
+			<h3 class="c-font-bold">내 사냥 목록</h3>
+			<div class="c-line-left"></div>
+		</div>
+            <!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+		<!-------------------------------------- 탭선택 --------------------------------------->
+
+		<div class="c-content-box c-size-md c-overflow-hide">
+			<div class="container">
+				<div class="c-content-tab-3 c-opt-1">
+					<div class="col-md-offset-3">
+						<ul class="nav c-theme-nav">
+							<li class="active">
+								<a class="c-font-16 c-theme-font c-font-bold" href="#c-tab3-1"
+								data-toggle="tab" id="openBuyTogether">개설한 같이사냥</a>
+							</li>
+							<li>
+								<div class="c-separator"></div>
+								<a class="c-font-16 c-theme-font c-font-bold" href="#c-tab3-2"
+								data-toggle="tab" id="joinBuyTogether">참여한 같이사냥</a>
+							</li>
+							<li>
+								<div class="c-separator"></div> <a
+								class="c-font-16 c-theme-font c-font-bold" href="#c-tab3-3"
+								data-toggle="tab" id="doneBuyTogether">완료한 같이사냥</a>
+							</li>
+						</ul>
+					</div>
+					<br>
+
+					<!-- --------------------------------------------검색창------------------------------------------- -->
+					<div class="container c-shop-advanced-search-1 c-center">
+						<div class="col-md-12 c-center">
+							<div class="row">
+								<div class="col-md-4 col-md-offset-2">
+									<select class="form-control c-square c-theme"
+										id="searchType">
+										<option value="t">제목</option>
+										<option value="c">내용</option>
+										<option value="w">작성자</option>
+										<option value="tc">제목&내용</option>
+										<option value="cw">내용&작성자</option>
+										<option value="tcw">제목&내용&작성자</option>
+									</select>
+								</div>
+								<div class="col-md-3">
+									<input type="text" class="form-control" id="keyword">
+									
+								</div>
+								<div class="col-md-2">
+									<button id="search" type="submit"
+										class="btn c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">
+										<i class="fa fa-search"></i>Search
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<br>
+
+					<!-- -------------------------------탭내용---------------------------------------- -->
+					<div class="c-tab-content">
+						<div class="container">
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="c-tab3-1">
+									<div
+										class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space">
+										<div class="container">
+											<div class="row" id="openBuyTogetherList"></div>
+											<!-- --------------------------------페이징------------------------------------ -->
+											
+											<div class="c-pagination c-center" id="openBuyTogetherPaging"></div>
+											
+
+										</div>
+									</div>
+
+								</div>
+								<div class="tab-pane fade" id="c-tab3-2"></div>
+								<div
+									class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space">
+									<div class="container">
+										<div class="row" id="joinBuyTogetherList"></div>
+										<!-- --------------------------------페이징------------------------------------ -->
+										
+										<div class="c-pagination c-center" id="joinBuyTogetherPaging"></div>
+										
+
+									</div>
+								</div>
+								<div class="tab-pane fade" id="c-tab3-3"></div>
+								<div
+									class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space">
+									<div class="container">
+										<div class="row" id="doneBuyTogetherList"></div>
+										<!-- --------------------------------페이징------------------------------------ -->
+										
+										<div class="c-pagination c-center" id="doneBuyTogetherPaging"></div>
+										
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+	</div>
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+	<!-- ----------------------------------핸들바----------------------------------- -->
+
+	<script id="myBuyTogetherTemplate" type="text/x-handlebars-template">
+
+{{#each.}}
+<div class="col-md-3 col-sm-6 c-margin-b-20 myBuyTogetherLi">
+	<input type="hidden" class ="buyTogetherNumber" value="{{buytogether_number}}">
+    <div class="c-content-product-2 c-bg-white">
+       	<div class="c-content-overlay readBuyTogether">
+           	<div class="c-overlay-wrapper">
+               	<div class="c-overlay-content">
+                   	<a class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">보기</a>
+                </div>
+            </div>
+        	<div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 330px; background-image: url({{imageHelper photo_path}}); id="buyTogether_number">
+			</div>
+        </div>
+
+      	<div class="c-info">
+        	<p class="c-title c-font-18 c-font-slim" id="title">{{titleHelper title}}</p>
+            <p class="c-price c-font-16 c-font-slim" id="price">가격:{{price}} 원</p>
+			<p class="c-price c-font-16 c-font-slim" id="duedate">마감일: ~{{DateHelper duedate}}</p>
+			<p class="c-price c-font-16 c-font-slim" id="buyTogether_address">지역:{{buytogether_address_sido}} {{buytogether_address_sigungu}}</p>
+			<p class="c-price c-font-16 c-font-slim" id="hunting_status">사냥상태:{{status_name}}</p>
+			<p class="c-price c-font-16 c-font-slim" id="hunting_type_number">사냥방식:{{hunting_type}}</p>
+			<p class="c-price c-font-16 c-font-slim" id="user_nickname">닉네임:{{nickname}} ({{reputation}})</p>
+       	</div>
+
+        <div class="btn-group btn-group-justified " role="group">
+        	
+			<div class="btn-group c-border-top fourthDiv" role="group">
+ 					
+				<a class="reputationBtn btn btn-lg c-btn-white c-btn-uppercase 
+							c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product" 
+							data-toggle="modal" data-target="#myModal" style="{{visibleOrNot beOrNot}}">평판주기
+				</a>
+
+				<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content c-square">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<h2 class="modal-title" id="myModalLabel">같이사냥</h2>
+							</div>
+							<div class="modal-body">	
+				
+							</div>
+							<div class="modal-footer">
+							
+								<button type="button" class="submitReputation btn c-theme-btn c-btn-square c-btn-bold c-btn-uppercase" data-dismiss="modal">
+									평판주기 완료</button>
+								<button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-square c-btn-bold c-btn-uppercase" data-dismiss="modal">
+									닫기</button>
+							</div>
+						</div>
+			<!-- /.modal-content -->
+					</div>
+		<!-- /.modal-dialog -->
+				</div>
+            </div>
+            <div class="btn-group c-border-left c-border-top" role="group">
+               <a class="finishBuyTogether btn btn-lg c-btn-white c-btn-uppercase c-btn-square 
+						c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product" style="{{visibleOrNotForFinish finishOrNot}}">
+						같이사냥 완료하기</a>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+</script>
+	<script id="openUserInfo" type="text/x-handlebars-template">
+{{#each.}}
+<div class="form-group has-warning reputationRows">
+    <input type="hidden" class ="joinUserNumber" value="{{joinUserNumber}}">
+	<input type="hidden" class ="buyTogetherNumberInModalBody" value="{{buyTogetherNumber}}">
+	<div class="row">	
+		<label class="col-md-6 control-label">nickname: {{joinUserNickName}} ({{joinUserReputation}})</label>
+		<div class="col-md-6" >
+			<label class="radio-inline" >
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="-2"> -2 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="-1"> -1 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="0"> 0 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="1"> 1 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="2"> 2 </label>
+		</div>
+	</div>
+ </div>
+{{/each}}
+</script>
+	<script id="joinUserInfo" type="text/x-handlebars-template">
+
+<div class="form-group has-warning reputationRows">
+    <input type="hidden" class ="joinUserNumber" value="{{joinUserNumber}}">
+	<input type="hidden" class ="buyTogetherNumberInModalBody" value="{{buyTogetherNumber}}">
+	<div class="row">	
+		<label class="col-md-6 control-label">nickname: {{joinUserNickName}} ({{joinUserReputation}})</label>
+		<div class="col-md-6" >
+			<label class="radio-inline" >
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="-2"> -2 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="-1"> -1 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="0"> 0 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="1"> 1 </label>
+			<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions{{joinUserNumber}}" value="2"> 2 </label>
+		</div>
+	</div>
+ </div>
+
+</script>
+	<script>
+		Handlebars.registerHelper("imageHelper", function(imagePath) {
+			
+			if(imagePath[0] == null) {
+				
+				return "/resources/img/noImage.png";
+				
+			} else {
+				
+				return "/restBuytogether/displayFile?fileName=" + imagePath[0].path;
+			}
+			
+			
+		});
+		Handlebars.registerHelper("DateHelper", function(timeValue) {
+
+			var dateObj = new Date(timeValue);
+			var year = dateObj.getFullYear();
+			var month = dateObj.getMonth() + 1;
+			var date = dateObj.getDate();
+
+			return year + "/" + month + "/" + date;
+		});
+
+		Handlebars.registerHelper("visibleOrNot", function(beOrNot) {
+
+			if (beOrNot == true) {
+				return 'display:none;';
+			} else if (beOrNot == false) {
+				return 'display:""';
+			}
+		});
+
+		Handlebars.registerHelper("visibleOrNotForFinish", function(finishOrNot) {
+
+			if (finishOrNot == true) {
+				return 'display:none;';
+			} else if (finishOrNot == false) {
+				return 'display:""';
+			}
+		});
+		
+		Handlebars.registerHelper("titleHelper", function(title) {
+
+			if (title.length >= 10) {
+				return title.substring(0,10) + "...";
+			} else {
+				return title;
+			}
+		});
+	</script>
+
+	<!-- --------------------------------풋터------------------------------------ -->
+
+	<div id="buytogetherFooter"></div>
+
+</body>
+
+</html>

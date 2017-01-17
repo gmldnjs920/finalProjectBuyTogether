@@ -192,7 +192,7 @@ CREATE TABLE buytogether (
 	writedate            timestamp         NOT NULL default now(),     -- 작성시간
 	updatedate           timestamp         NOT NULL default now(),     -- 수정시간
 	duedate              timestamp         NOT NULL,     -- 마감시간
-	joinin_number          INTEGER      NOT NULL,     -- 참여정원
+	join_number          INTEGER      NOT NULL,     -- 참여정원
 	price                INTEGER      NOT NULL,     -- 가격
 	category_number      INTEGER      NULL,     -- 카테고리번호
 	user_number          INTEGER      NOT NULL,     -- 유저번호
@@ -614,37 +614,37 @@ insert into huntingstatus(status_name)
 values("사냥실패");
 
 -- buytogether
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("햄버거 살사람 괌", "롯데리아 9,900원 행사 같이 하실분? 추가 2명 모집", "2016-12-03", 2, 9900, 1, 4, 2);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("립스틱 같이 살사람~", "미샤에서 1+1데이 립스틱 같이 사요","2016-12-04", 1, 12000, 2, 5, 2);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("카카오톡 이어폰 1+1", "이어폰 같이 사자 님들아", "2016-12-05", 1, 15000, 3, 3, 1);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("코스타 회식 같이 참가하실분", "코스타에서 하는 회식인데 같이 참여합시다.", "2016-12-28", 1, 50000, 1, 6, 2);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("참이슬 크리스마스 에디션 같이 사자", "아이유가 광고하는 참이슬 크리스마스 에디션 쏴주 같이 살사람", "2016-12-25", 5, 500000, 1, 8, 2);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("해외직구 같이 하실분~", "꼼대가르송 살사람 같이서 배송비 나눠요 ㅎ", "2017-01-01", 5, 250000, 4, 7, 1);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("아이폰7 같이 살사람 모여라 모여라", "인천지점에서 할인하고 있으니까 같이 가자 님들아", "2016-12-31", 10, 700000, 5,  4, 2);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("비행기 티켓 사실분 커플석", "제주도 항공권 커플석이 할인되요 같이 사실분 연락주세요", "2017-01-03", 1, 80000, 5, 4, 2);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("브라질산 인디아 커피가 1+1", "아메리카노마실껀데 핫초코 마실래?", "2016-12-25", 1, 8000, 1, 7, 2);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("강아지 분양 같이 하실분", "강아지가 너무 이뻐서 같이 사실분 근데 아직 안태어 났어", "2017-05-05", 5, 9999999, 5,  1, 1);
 
-insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+insert into buytogether(title, content, duedate, join_number, price, category_number, user_number, hunting_type_number)
 values("미용실 할인 티켓을 같이 살 사람을 구하고 있어요", "이번에 오픈한 미용실이 있는데 같이 가자", "2016-12-12", 3, 12000, 5, 2, 2);
 
 -- dip
@@ -750,7 +750,28 @@ insert into board(board_title, board_content, admin_number, board_type_number)
 values("공지사항", "우리사이트는 같이사는 사이트 입니다.", 2 , 1);
 
 insert into board(board_title, board_content, admin_number, board_type_number)
-values("[사냥관련] FaQ", "어떤 방식으로 사냥을 하는건가요.", 2 , 2);
+values("[사냥관련] FaQ 어떤 방식으로 사냥을 하는건가요.", "만나서 해야지", 2 , 2);
+
+insert into board(board_title, board_content, admin_number, board_type_number)
+values("[사냥관련] FaQ 사냥 이 뭐죠?", "사냥 사냥", 2 , 2);
+
+insert into board(board_title, board_content, admin_number, board_type_number)
+values("[정보관련] FaQ", "어떤 방식으로 사냥을 하는건가요.", 2 , 2);
+
+insert into board(board_title, board_content, admin_number, board_type_number)
+values("[정보관련] FaQ", "어떤 방식으로 사냥을 하는건가요.", 2 , 2);
+
+insert into board(board_title, board_content, admin_number, board_type_number)
+values("[고객센터] FaQ", "어떤 방식으로 사냥을 하는건가요.", 2 , 2);
+
+insert into board(board_title, board_content, admin_number, board_type_number)
+values("[고객센터] FaQ 고객센터 질문", "고객센터 고객센터.", 2 , 2);
+
+insert into board(board_title, board_content, admin_number, board_type_number)
+values("[회원관련] FaQ 회원이 뭐죠?", "회원은 이거다", 2 , 2);
+
+insert into board(board_title, board_content, admin_number, board_type_number)
+values("[회원관련] FaQ 어떤 방식으로 회원을 하는건가요", "회원회원.", 2 , 2);
 
 insert into board(board_title, board_content, admin_number, board_type_number)
 values("정보사냥", "지금 이마트 1+1 데이!!", 2 , 3);
@@ -816,3 +837,5 @@ values(35.827981, 127.1199938, "전라북도", "전주", "전라북도 전주시
 -- declareuser
 insert into declareuser(user_number, delcare_count)
 values(2, 1);
+
+update user set pw="03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4" where user_number=1; 

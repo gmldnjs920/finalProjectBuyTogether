@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>같이사냥 | 로그인</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+<!---------------------공통스크립트--------------------->
+<link href="/resources/theme/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+<link href="/resources/theme/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/animate.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/plugins.css" rel="stylesheet" type="text/css" />
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<script src="/resources/theme/js/app.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components-shop.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/NotoKRRegular.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/simple-line-icons.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/font-awesome.css" type="text/css">
+<script src="/resources/theme/js/jquery-migrate.min.js" type="text/javascript"></script>
+<!-------------------------------------------------->
+<script>
+$(document).ready(function() {
+	
+	$("#buytogetherHeader").load("/views/include/header.html");
+	$("#buytogetherFooter").load("/views/include/footer.html");
+
+});
+</script>
+<!-- 핸들바 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="/resources/js/qna/qnaUpdateHandler.js"></script>
+
+<style>
+/* 글자수 제한 스타일 */
+#board_content {
+	white-space: nowrap;
+	width: 40em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+</style>
+
+</head>	
+<!-- BEGIN: HEADER 시작-->
+<body class="c-layout-header-fixed c-layout-header-mobile-fixed c-layout-header-topbar c-layout-header-topbar-collapse">
+<!-- BEGIN: BODY 시작 -->
+	
+	<div id=buytogetherHeader></div>	
+
+						<!--  ---------------------------------------------------------- 상단 ---------------------------------------------------------- -->
+		<div class="c-layout-body">
+			<div
+				class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+				<div class="container">
+					<div class="c-page-title c-pull-left">
+						<h3 class="c-font-uppercase c-font-sbold">
+							<a href="qnaListAll.html">QnA</a>
+						</h3>
+					</div>
+					<ul
+						class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+						<li><a href="qnaListAll.html">QnA</a></li>
+						<li>/</li>
+						<li>조회</li>
+
+					</ul>
+				</div>
+			</div>
+			<!--  ---------------------------------------------------------- qna 수정 ---------------------------------------------------------- -->
+			<div class="container">
+<!-- template -->				
+				<div id="qnaUpdate"></div>
+			</div>
+		</div>
+
+	<div id=buytogetherFooter></div>
+		
+	<!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
+	<!-- END: LAYOUT/FOOTERS/GO2TOP -->
+	<!-- BEGIN: LAYOUT/BASE/BOTTOM -->
+	<!-- BEGIN: CORE PLUGINS -->
+	<script src="/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+	<script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/resources/js/user/loginEventHandler.js" type="text/javascript"></script>
+	<script src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" type="text/javascript" charset="utf-8"></script>
+	<!-- END: CORE PLUGINS -->
+	<!-- BEGIN: LAYOUT PLUGINS -->
+	<script src="/resources/bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+	<!-- END: LAYOUT PLUGINS -->
+	<!-- END: LAYOUT/BASE/BOTTOM -->
+
+	<script id="qnaUpdateTemplate" type="text/x-handlebars-template">
+<div id="qna_number" data-qnanumber='{{qna_number}}'>
+	<div><br>
+		<div style="display: none;">
+			<p id = "qna_number">{{qna_number}}</p>
+		</div>
+		<label class = "pull-right">
+			<p id = "nickname">{{nickname}}</p>
+			<P id = "qna_writedate">{{dateHelper qna_writedate}}</p>
+		</label>	
+		<br><br><br>
+		<input class="form-control" id="qna_title" type="text" value = "{{qna_title}}" >
+		<br>
+		<textarea class="form-control" rows="20" cols="140" id = "qna_content">{{qna_content}}</textarea>
+		
+	</div>
+
+	<a href="/qna"><br>
+		<button id="qnaUpdate" type="submit" class="btn btn-md btn-primary c-btn-square c-btn-bold">수정하기</button>
+	</a>
+		
+</div>
+</script>
+<script>
+Handlebars.registerHelper("dateHelper", function(timeValue) {
+
+	var dateObj = new Date(timeValue);
+	var year = dateObj.getFullYear();
+	var month = dateObj.getMonth() + 1;
+	var date = dateObj.getDate();
+	
+	return year+"/"+month+"/"+date;
+	
+});
+</script>
+	</body>
+</html>

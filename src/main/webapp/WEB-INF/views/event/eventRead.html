@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>같이사냥 | 로그인</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+<!---------------------공통스크립트--------------------->
+<link href="/resources/theme/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+<link href="/resources/theme/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/animate.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/plugins.css" rel="stylesheet" type="text/css" />
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<script src="/resources/theme/js/app.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components-shop.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/NotoKRRegular.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/simple-line-icons.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/font-awesome.css" type="text/css">
+<script src="/resources/theme/js/jquery-migrate.min.js" type="text/javascript"></script>
+<link rel="shortcut icon" href="/resources/theme/css/favicon.ico" type="image/x-icon" />
+<!-------------------------------------------------->
+<script>
+$(document).ready(function() {
+	
+	$("#buytogetherHeader").load("/views/include/header.html");
+	$("#buytogetherFooter").load("/views/include/footer.html");
+
+});
+</script>
+
+<!-- 핸들바 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="/resources/js/event/eventListOneHandler.js"></script>
+
+<style type="text/css">
+#searchType {
+	width: 200px;
+}
+</style>
+
+<style type="text/css">
+#keyword {
+	width: 300px;
+}
+</style>
+
+</head>
+<!-- BEGIN: HEADER 시작-->
+<body
+	class="c-layout-header-fixed c-layout-header-mobile-fixed c-layout-header-topbar c-layout-header-topbar-collapse">
+	<!-- BEGIN: BODY 시작 -->
+
+	<div id=buytogetherHeader></div>
+
+	<div class="c-layout-body">
+		<!-- ---------------------------------------------------- 상단바  ---------------------------------------------------- -->
+		<div
+			class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+			<div class="container">
+				<div class="c-page-title">
+					<h3 class="c-font-uppercase c-font-bold">정보사냥</h3>
+				</div>
+				<ul
+					class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+					<li><a href="eventListAll.html">정보사냥</a></li>
+					<li>/</li>
+					<li>조회</li>
+
+				</ul>
+			</div>
+		</div>
+
+		<!-- ---------------------------------------------------- 이벤트 조회   ---------------------------------------------------- -->
+		<div class="c-content-box c-size-md">
+			<div class="container">
+				<div class="row">
+					<div class="c-content-blog-post-1-list">
+						<div class="c-content-blog-post-1">
+
+							<div id="eventListOne"></div>
+
+							<div class="c-title c-font-bold c-font-uppercase"></div>							
+						</div>						
+						<button class="btn btn-primary c-btn-square" id="listBtn">목록으로</button>
+					</div>					
+				</div>
+			</div>
+		</div>
+		<!-- 정보사냥 조회 body end -->
+	</div>
+
+	<div id=buytogetherFooter></div>
+
+	<script id="eventListOneTemplate" type="text/x-handlebars-template">
+	<div class="c-info-list">
+		<div class="row">	
+			<label class = "c-desc c-font-16 c-font-thin pull-right">{{admin_nickname}}</label><br><br>    	
+			<h3 class="c-desc c-font-16 c-font-bold" id = "board_content">{{board_content}}</h3>
+		</div> 
+		<img src= "{{imageHelper path}}" class="img-thumbnail"  width="1200px">
+	</div>
+
+</script>
+	
+<script>
+Handlebars.registerHelper("imageHelper", function(imagePath) {
+	
+	if(imagePath[0] == null) {
+		
+		return "/resources/img/noImage.png";
+		
+	} else {
+		
+		return imagePath[0].path;
+	}
+	
+	
+});
+</script>
+	<!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
+	<!-- END: LAYOUT/FOOTERS/GO2TOP -->
+	<!-- BEGIN: LAYOUT/BASE/BOTTOM -->
+	<!-- BEGIN: CORE PLUGINS -->
+	<script src="/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+	<script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<!-- END: CORE PLUGINS -->
+	<!-- BEGIN: LAYOUT PLUGINS -->
+	<script src="/resources/bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+	<!-- END: LAYOUT PLUGINS -->
+	<!-- END: LAYOUT/BASE/BOTTOM -->
+</body>
+</html>

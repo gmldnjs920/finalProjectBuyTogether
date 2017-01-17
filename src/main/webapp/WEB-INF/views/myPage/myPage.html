@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>같이사냥 | 내 정보 조회</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<!---------------------공통스크립트--------------------->
+<link href="/resources/theme/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+<link href="/resources/theme/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/animate.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/plugins.css" rel="stylesheet" type="text/css" />
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<script src="/resources/theme/js/app.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components-shop.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/NotoKRRegular.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/simple-line-icons.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/font-awesome.css" type="text/css">
+<script src="/resources/theme/js/jquery-migrate.min.js" type="text/javascript"></script>
+<link rel="shortcut icon" href="/resources/theme/css/favicon.ico" type="image/x-icon" />
+<!-------------------------------------------------->
+<script>
+$(document).ready(function() {
+	
+	$("#buytogetherHeader").load("/views/include/header.html");
+	$("#buytogetherFooter").load("/views/include/footer.html");
+	
+});
+</script>
+</head>
+<!-- BEGIN: HEADER 시작-->
+
+<!-- disable 스타일 -->
+<style>
+input[type=text]:disabled {
+	background: #ffffff;
+}
+
+input[type=tel]:disabled {
+	background: #ffffff;
+}
+</style>
+<body class="c-layout-header-fixed c-layout-header-mobile-fixed c-layout-header-topbar c-layout-header-topbar-collapse">
+<!-- BEGIN: BODY 시작 -->
+<div id=buytogetherHeader></div>
+<div class="c-layout-body">
+	<!-- 내 정보 조회 body begin-->
+		<!-- 내 정보 수정 body begin-->
+	<div class="container">
+		<div class="c-content-title-1">
+				<h3 class="c-font-bold">마이페이지</h3>
+				<div class="c-line-left"></div>
+			</div>
+		<div class="c-layout-sidebar-content ">
+			<!-- BEGIN: PAGE CONTENT -->
+			<form class="form-horizontal " role="form" onsubmit="return false;">
+				<div class="form-group" id="divId">
+					<label for="inputReputation" class="col-md-1 col-md-offset-3 control-label c-font-bold">평판</label>
+					<div class="col-md-2">
+						<input type="text" class="form-control onlyAlphabetOrNumber"
+							id="reputation" data-rule-required="true" disabled="disabled">
+					</div>
+				</div>
+				<div id="passwordArea" style="display:none;">
+					<div class="form-group">
+						<label for="inputId" class="col-md-4 control-label c-font-bold">패스워드</label>
+						<div class="col-md-3">
+							<button class="btn btn-primary" data-toggle="collapse" data-target="#collapse" id="collapseBtn">비밀번호 수정</button>
+						</div>
+					</div>
+					<div class="form-group collapse" id="collapse">
+						<label for="inputPassword" class="col-md-4 control-label c-font-bold">현재 패스워드</label>
+						<div class="col-md-5">
+							<input type="password" class="form-control onlyAlphabetAndNumber"
+								id="password" name="excludeHangul" data-rule-required="true"
+								placeholder="현재 패스워드를 입력해주세요" maxlength="16"><p></p>
+						</div>
+						<label for="inputPasswordCheck" class="col-md-4 control-label c-font-bold">변경 패스워드</label>
+						<div class="col-md-4">
+							<input type="password" class="form-control" id="updatePassword" data-rule-required="true" placeholder="변경 할 패스워드를 입력해주세요" maxlength="16">
+							<p class="help-block" style="font-size: 12px">* 최소 6~16자이내의 숫자 혹은 특수문자를 반드시 포함</p>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-primary" id="pwUpdate">수정</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputNickname" class="col-md-4 control-label c-font-bold">이름</label>
+					<div class="col-md-5">
+						<input type="text" class="form-control" id="name" data-rule-required="true" disabled="disabled">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputNickname" class="col-md-4 control-label c-font-bold">닉네임</label>
+					<div class="col-md-5">
+						<input type="text" class="form-control" id="nickname" data-rule-required="true" disabled="disabled">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPhoneNumber" class="col-md-4 control-label c-font-bold">연락처</label>
+					<div class="col-md-4">
+						<input type="tel" class="form-control onlyNumber" id="phone_number" data-rule-required="true" maxlength="11">
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary" id="phoneBtn">연락처 수정</button>
+					</div>
+				</div>
+				<div class="form-group" id="emailArea" style="display:none;">
+					<label for="inputEmail" class="col-md-4 control-label c-font-bold">이메일</label>
+					<div class="col-md-4">
+						<input type="text" name="txtEmail_01" size="12"
+							class="form-control" id="email" data-rule-required="true" maxlength="20">
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-primary c-btn-square c-btn-uppercase" id="emailBtn">중복확인</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputInterest" class="col-md-4 control-label c-font-bold">관심 카테고리</label>
+					<div class="col-md-4 ">
+						<div class="checkbox checkbox-primary">
+							<label for="interest1">
+							<input name="1" id="interest1" value="1" class="check" type="checkbox">식품
+							</label> 
+							<label for="interest2">
+							<input name="2" id="interest2" value="2" class="check" type="checkbox">뷰티
+							</label> 
+							<label for="interest3">
+							<input name="3" id="interest3" value="3" class="check" type="checkbox">생활용품
+							</label> 
+							<label for="checkbox4"> 
+							<input name="4" id="interest4" value="4" class="check" type="checkbox">의류/악세사리
+							</label> 
+							<label class="interest5">
+							<input name="5" id="interest5" class="check" value="5" type="checkbox">기타
+							</label>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary c-btn-square c-btn-uppercase" id="interestBtn">카테고리 수정</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="address" class="col-md-4 control-label c-font-bold">관심지역</label>
+					<div class="row">
+						<div class="col-md-2"><input type="button" id="DaumPostcode" value="우편번호 찾기"></div>
+					</div>
+					<div class="row">
+						<br><div class="col-md-2 col-md-offset-4"><input type="text" class="form-control" readonly id="sido" placeholder="도/시"></div>					
+						<div class="col-md-2"><input type="text" class="form-control" readonly id="sigungu" placeholder="시/군/구"></div>
+						<div class="col-md-2"><button class="btn btn-primary c-btn-square c-btn-uppercase" id="addressBtn">지역 수정</button></div>	
+					</div>				
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- modal -->
+    <div class="modal fade bs-example-modal-sm" id="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    	<div class="modal-dialog modal-md">
+        	<div class="modal-content">
+            	<div class="modal-body" id="modal-body">
+                    <p class="c-font-red" id="msg">
+						<span class="c-font-15"></span>
+					</p>
+                </div>
+                <div class="modal-footer">
+                	<button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase" id="close" data-dismiss="modal">Close</button>
+            	</div>
+        	</div>
+    	</div>
+    </div>
+	<!-- 내 정보 수정 body end -->
+</div>
+<!-- BEGIN: FOOTER 시작 -->
+<div id=buytogetherFooter></div>
+<!-- END: FOOTER 끝 -->
+	<!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
+	<div class="c-layout-go2top">
+		<i class="icon-arrow-up"></i>
+	</div>
+	<!-- END: LAYOUT/FOOTERS/GO2TOP -->
+	<!-- BEGIN: CORE PLUGINS -->
+    <script src="/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/resources/js/myPage/myPageEventHandler.js" type="text/javascript"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js" type="text/javascript"></script>
+	<!-- END: CORE PLUGINS -->
+    <!-- BEGIN: LAYOUT PLUGINS -->
+    <script src="/resources/bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+    <!-- END: LAYOUT PLUGINS -->
+    <!-- END: LAYOUT/BASE/BOTTOM -->
+	</body>
+</html>

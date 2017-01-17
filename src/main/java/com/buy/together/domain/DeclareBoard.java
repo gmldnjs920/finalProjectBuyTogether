@@ -3,16 +3,30 @@ package com.buy.together.domain;
 public class DeclareBoard {
 
 	private int delcare_number;
-	private int buyTogether_number;
+	private int buytogether_number;
 	private int type_number;
 	private int declare_category_number;
 	private int user_number;
+	private int comment_number;
 	private String declare_reason;
 	private String declare_photo;
-	private Boolean delclare_status;
+	private Boolean declare_status;
 
 	public DeclareBoard() {
 
+	}
+
+	// 신고입력
+	public DeclareBoard(int buytogether_number, int type_number, int comment_number, int declare_category_number,
+			int user_number, String declare_reason) {
+		
+		this.buytogether_number = buytogether_number;
+		this.type_number = type_number;
+		this.comment_number = comment_number;
+		this.declare_category_number = declare_category_number;
+		this.user_number = user_number;
+		this.declare_reason = declare_reason;
+		
 	}
 
 	public int getDelcare_number() {
@@ -23,12 +37,12 @@ public class DeclareBoard {
 		this.delcare_number = delcare_number;
 	}
 
-	public int getBuyTogether_number() {
-		return buyTogether_number;
+	public int getBuytogether_number() {
+		return buytogether_number;
 	}
 
-	public void setBuyTogether_number(int buyTogether_number) {
-		this.buyTogether_number = buyTogether_number;
+	public void setBuytogether_number(int buytogether_number) {
+		this.buytogether_number = buytogether_number;
 	}
 
 	public int getType_number() {
@@ -55,6 +69,14 @@ public class DeclareBoard {
 		this.user_number = user_number;
 	}
 
+	public int getComment_number() {
+		return comment_number;
+	}
+
+	public void setComment_number(int comment_number) {
+		this.comment_number = comment_number;
+	}
+
 	public String getDeclare_reason() {
 		return declare_reason;
 	}
@@ -71,12 +93,12 @@ public class DeclareBoard {
 		this.declare_photo = declare_photo;
 	}
 
-	public Boolean getDelclare_status() {
-		return delclare_status;
+	public Boolean getDeclare_status() {
+		return declare_status;
 	}
 
-	public void setDelclare_status(Boolean delclare_status) {
-		this.delclare_status = delclare_status;
+	public void setDeclare_status(Boolean declare_status) {
+		this.declare_status = declare_status;
 	}
 
 }

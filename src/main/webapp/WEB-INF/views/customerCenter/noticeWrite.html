@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>같이사냥 | 공지사항</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+<!---------------------공통스크립트--------------------->
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<link href="/resources/theme/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+<link href="/resources/theme/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/animate.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/plugins.css" rel="stylesheet" type="text/css" />
+<script src="/resources/theme/js/app.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components-shop.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/NotoKRRegular.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/simple-line-icons.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/font-awesome.css" type="text/css">
+<script src="/resources/theme/js/jquery-migrate.min.js" type="text/javascript"></script>
+<!-------------------------------------------------->
+<link href="/resources/theme/plugin/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="/resources/theme/css/favicon.ico" type="image/x-icon" />
+
+<script>
+	$(document).ready(function() {
+
+		$("#buytogetherHeader").load("/views/include/header.html");
+		$("#buytogetherFooter").load("/views/include/footer.html");
+		
+	});
+</script>
+</head>
+<!-- BEGIN: BODY 시작 -->
+<body class="c-layout-header-fixed c-layout-header-mobile-fixed c-layout-header-topbar c-layout-header-topbar-collapse">
+	<div id="buytogetherHeader"></div>
+	<div class="c-layout-body">
+		<!-- 내 정보 수정 body begin-->
+		<div class="container">
+			<div class="c-layout-sidebar-content ">
+				<!-- BEGIN: PAGE CONTENT -->
+				<div class="c-content-title-1">
+					<h3 class="c-font-uppercase c-font-bold">공지사항 쓰기</h3>
+					<div class="c-line-left"></div>
+				</div>
+				<form class="form-horizontal" role="form" onsubmit="return false;"
+					id="notice_form">
+					<div class="form-group" id="divId">
+						<label for="inputId" class="col-md-1 control-label">제목</label>
+						<div class="col-md-11">
+							<input type="text" class="form-control c-square c-theme"
+								id="board_title">
+						</div>
+					</div>
+					<div class="form-group" id="divId">
+						<label for="inputId" class="col-md-1 control-label">내용</label>
+						<div class="col-md-11">
+							<textarea class="form-control c-square c-theme" rows="20"
+								id="board_content"></textarea>
+						</div>
+					</div>
+					<div class="row c-margin-t-30">
+						<div class="form-group c-center" role="group">
+							<button type="button" class="btn btn-lg c-btn-border-2x c-btn-square c-btn-regular c-btn-uppercase c-btn-bold c-margin-b-100"
+								id="insert">등록</button>
+							<button type="button" class="btn btn-lg c-btn-border-2x c-btn-square c-btn-regular c-btn-uppercase c-btn-bold c-margin-b-100"
+								id="cancle">취소</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- 내 정보 수정 body end -->
+		<!-- END: BODY 끝 -->
+	</div>
+	<!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
+	<div class="c-layout-go2top">
+		<i class="icon-arrow-up"></i>
+	</div>
+	
+	<!-- -------mypage js-------- -->
+	<script src="/resources/js/notice/noticeWriteEventHandler.js"></script>
+
+	<!-- BEGIN: FOOTER 시작 -->
+	<div id="buytogetherFooter"></div>
+	<!-- END: FOOTER 끝 -->
+
+	<script src="/resources/bootstrap/js/bootstrap.js"type="text/javascript"></script>
+	<script src="/resources/bootstrap/js/bootstrap.min.js"type="text/javascript"></script>
+	<script src="/resources/bootstrap/js/bootstrap-slider.js"type="text/javascript"></script>
+
+</body>
+</html>

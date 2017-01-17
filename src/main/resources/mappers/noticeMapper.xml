@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mappers.noticeMapper">
+
+	<!-- 공지사항 목록 -->
+	<select id="noticeListAll" resultType="com.buy.together.dto.BoardDTO">
+	<![CDATA[
+		select b.board_number,
+		b.board_title, a.admin_nickname, b.board_writeDate
+		from board b, admin
+		a, boardtype bt
+		where b.board_type_number = 1 and b.board_type_number= bt.board_type_number and a.admin_number = b.admin_number
+	]]>
+
+		<include refid="search"></include>
+           
+      <![CDATA[
+      order by board_number desc
+      limit #{pageStart}, #{perPageNum}
+      ]]>
+	</select>
+	
+	<!-- 공지사항 카운터 -->
+	<select id="searchNoticeListCount" resultType="int">
+	<![CDATA[
+	select count(board_number)
+	from board
+	where board_number > 0 and board_type_number = 1
+	]]>
+	
+	<include refid="search"></include>
+	</select>
+	
+	<!-- 검색용코드 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				<!-- and title like CONCAT('%', #{keyword}, '%') -->
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and board_content like CONCAT('%', #{keyword}, '%')
+			</if>
+
+			<if test="searchType == 'tc'.toString()">
+				and ( board_title like CONCAT('%', #{keyword}, '%') OR 
+				board_content like CONCAT('%', #{keyword}, '%'))
+			</if>
+
+		</if>
+	</sql>
+
+	<!-- 공지사항 조회 -->
+	<select id="noticeListOne" resultType="com.buy.together.dto.BoardDTO">
+		select b.board_number, b.board_title, b.board_content, a.admin_nickname, b.board_writeDate
+		from board b, admin a
+		where b.board_number = #{board_number} and a.admin_number = b.admin_number;
+	</select>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticeDelete">
+	delete from board
+	where board_number = #{board_number} and board_type_number = 1;
+	</delete>
+	
+	<!-- 공지사항 글쓰기 -->
+   <insert id="noticeInsert">
+      insert into board(board_title, board_content, admin_number, board_type_number)
+      values(#{board_title}, #{board_content}, 2, 1);
+   </insert>
+</mapper>

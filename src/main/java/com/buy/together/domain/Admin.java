@@ -7,12 +7,18 @@ public class Admin {
 	private String admin_pw;
 	private String admin_nickname;
 	private String admin_email;
-	private String admin_phoneNumber;
+	private String admin_phonenumber;
 	private int admin_grade;
 
 	public Admin() {
 
 	}
+	
+	public Admin(int admin_number, String admin_id, String admin_pw) {
+		this.admin_number = admin_number;
+		this.admin_id = admin_id;
+		this.admin_pw = admin_pw;
+	}	
 
 	public int getAdmin_number() {
 		return admin_number;
@@ -54,12 +60,12 @@ public class Admin {
 		this.admin_email = admin_email;
 	}
 
-	public String getAdmin_phoneNumber() {
-		return admin_phoneNumber;
+	public String getAdmin_phonenumber() {
+		return admin_phonenumber;
 	}
 
-	public void setAdmin_phoneNumber(String admin_phoneNumber) {
-		this.admin_phoneNumber = admin_phoneNumber;
+	public void setAdmin_phonenumber(String admin_phonenumber) {
+		this.admin_phonenumber = admin_phonenumber;
 	}
 
 	public int getAdmin_grade() {

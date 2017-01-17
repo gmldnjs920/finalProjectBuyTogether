@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mappers.mypageMapper">
+
+	<!-- 내 정보 조회 -->
+	<select id="read" resultType="com.buy.together.dto.MyPageDTO">
+		select u.name, u.email, u.phone_number, u.birthdate, u.gender, u.nickname, u.reputation, a.user_sido, a.user_sigungu
+		from user u
+		left outer join useraddress a on a.user_number = u.user_number 
+		where u.user_number = #{user_number}
+	</select>
+	
+	<!-- 내 관심 카테고리 조회 -->
+	<select id="readInterest" resultType="Integer">
+		select i.category_number
+		from interest i
+		where i.user_number = #{user_number}
+	</select>
+	
+	<!-- 내 비밀번호 조회 -->
+	<select id="readPassword" resultType="String">
+		select pw
+		from user
+		where user_number = #{user_number} and pw = #{pw}
+	</select>
+	
+	<!-- 내 비밀번호 수정 -->
+	<select id="updatePassword" >
+		update user
+		set pw = #{pw}
+		where user_number = #{user_number}
+	</select>
+	
+	<!-- 이메일 조회 -->
+	<select id="readEmail" resultType="String">
+		select email
+		from user
+		where email = #{email}
+	</select>
+	
+	<!-- 내 이메일 수정 -->
+	<select id="updateEmail" >
+		update user
+		set email = #{email}
+		where user_number = #{user_number}
+	</select>
+	
+	<!-- 연락처 조회 -->
+	<select id="readPhoneNumber" resultType="String">
+		select phone_number
+		from user
+		where phone_number = #{phone_number}
+	</select>
+	
+	<!-- 내 연락처 수정 -->
+	<select id="updatePhoneNumber" >
+		update user
+		set phone_number = #{phone_number}
+		where user_number = #{user_number}
+	</select>
+	
+	<!-- 내 관심 카테고리 삭제 -->
+	<delete id="deleteInterest" >
+		delete
+		from interest
+		where user_number = #{user_number}
+	</delete>
+	
+	<!-- 관심 카테고리 등록 -->
+	<insert id="createInterest">
+		insert 
+		into interest(category_number, user_number)
+		values (#{interest}, #{user_number}); 
+	</insert>
+	
+	<!-- 내 관심 지역 수정 -->
+	<update id="updateAddress">
+		update useraddress
+		set user_sido = #{user_sido}, user_sigungu = #{user_sigungu}
+		where user_number = #{user_number}
+	</update>
+	
+	<!-- 이메일 중복확인 -->
+	<select id="userEmailCheck" resultType="String">
+		select email
+		from user
+		where email = #{email}
+	</select>
+	
+	<!-- 내 정보 수정 -->
+ 	<update id="userUpdate">
+		update user
+		set pw = #{pw}, phone_number = #{phone_number}, email = #{email}
+		where id = #{id}
+	</update>
+	
+</mapper>
+
+

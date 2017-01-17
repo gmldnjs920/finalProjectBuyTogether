@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 
 public class BuyTogether {
 
-	private int buyTogether_number;
+	private int buytogether_number;
 	private String title;
 	private String content;
 	private Timestamp writeDate;
 	private Timestamp updateDate;
 	private String dueDate;
-	private int joinin_number;
+	private int join_number;
 	private int price;
 	private int category_number;
 	private int user_number;
@@ -22,12 +22,12 @@ public class BuyTogether {
 
 	}
 
-	public int getBuyTogether_number() {
-		return buyTogether_number;
+	public int getBuytogether_number() {
+		return buytogether_number;
 	}
-
-	public void setBuyTogether_number(int buyTogether_number) {
-		this.buyTogether_number = buyTogether_number;
+	
+	public void setBuytogether_number(int buytogether_number) {
+		this.buytogether_number = buytogether_number;
 	}
 
 	public String getTitle() {
@@ -45,8 +45,6 @@ public class BuyTogether {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	
 
 	public Timestamp getWriteDate() {
 		return writeDate;
@@ -72,12 +70,12 @@ public class BuyTogether {
 		this.dueDate = dueDate;
 	}
 
-	public int getJoinin_number() {
-		return joinin_number;
+	public int getJoin_number() {
+		return join_number;
 	}
 
-	public void setJoinin_number(int joinin_number) {
-		this.joinin_number = joinin_number;
+	public void setJoin_number(int join_number) {
+		this.join_number = join_number;
 	}
 
 	public int getPrice() {

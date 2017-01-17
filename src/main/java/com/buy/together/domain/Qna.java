@@ -7,7 +7,7 @@ public class Qna {
 	private int qna_number;
 	private String qna_title;
 	private String qna_content;
-	private Date qna_writeDate;
+	private Date qna_writedate;
 	private int user_number;
 	private int admin_number;
 
@@ -39,12 +39,12 @@ public class Qna {
 		this.qna_content = qna_content;
 	}
 
-	public Date getQna_writeDate() {
-		return qna_writeDate;
+	public Date getQna_writedate() {
+		return qna_writedate;
 	}
 
-	public void setQna_writeDate(Date qna_writeDate) {
-		this.qna_writeDate = qna_writeDate;
+	public void setQna_writedate(Date qna_writedate) {
+		this.qna_writedate = qna_writedate;
 	}
 
 	public int getUser_number() {

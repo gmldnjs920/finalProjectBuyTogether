@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mappers.myBuyTogetherMapper">
+
+	<!-- 같이사냥 게시글의 사진조회 -->
+	<select id="photoList" resultType="attachedPhoto">
+		select *
+		from attachedphoto
+		where board_type_number = 5 and buytogether_number =
+		#{buytogether_number}
+		order by photo_number desc
+	</select>
+
+	<!-- 개설한 같이사냥 -->
+	<select id="searchOpenBuyTogether" resultType="com.buy.together.dto.BuyTogetherDTO">
+	 	<![CDATA[
+				select bt.buytogether_number, bt.title, bt.content, bt.writeDate, bt.updateDate, bt.duedate, bt.join_number,
+				bt.price, addr.longitude, addr.latitude, addr.buytogether_address_sido, addr.buytogether_address_sigungu, c.category_name,
+				u.nickname, u.reputation, hs.status_name, ht.hunting_type
+		from huntingtype ht, huntingstatus hs, category c, user u, buytogether bt
+        left outer join buytogetheraddress addr on addr.buytogether_number = bt.buytogether_number
+		where hs.status_number = bt.status_number and
+			  ht.hunting_type_number = bt.hunting_type_number and c.category_number = bt.category_number and
+			  (hs.status_name = "혼자사냥중" or hs.status_name = "같이사냥중" or hs.status_name = "사냥실패")
+			  and u.user_number in (select bt.user_number from buytogether where bt.user_number = #{user_number})
+        
+		]]>
+
+		<include refid="search"></include>
+			  
+		<![CDATA[
+		order by buytogether_number desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+
+	<!-- 참여한 같이사냥 목록 -->
+	<select id="searchJoinBuyTogether" resultType="com.buy.together.dto.BuyTogetherDTO">
+				<![CDATA[
+				select bt.buytogether_number, bt.title, bt.content, bt.duedate, bt.join_number,
+				bt.price, addr.buytogether_address_sido, addr.buytogether_address_sigungu, 
+				u.nickname, u.reputation, hs.status_name, ht.hunting_type
+				from huntingtype ht, huntingstatus hs, user u, joinin j, buytogether bt
+                left outer join buytogetheraddress addr on  addr.buytogether_number = bt.buytogether_number 
+				where hs.status_number = bt.status_number and
+			  ht.hunting_type_number = bt.hunting_type_number and u.user_number = j.user_number and
+			  (hs.status_name = "혼자사냥중" or hs.status_name = "같이사냥중" or hs.status_name = "사냥실패")
+              and bt.buytogether_number in (select j.buytogether_number from joinin where j.user_number = #{user_number})
+		]]>
+
+		<include refid="search"></include>
+			  
+		<![CDATA[
+		order by buytogether_number desc
+		limit #{pageStart}, #{perPageNum};
+		]]>
+	</select>
+
+	<!-- 완료한 같이사냥 목록 -->
+	<select id="searchDoneBuyTogether" resultType="com.buy.together.dto.BuyTogetherDTO">
+		<![CDATA[
+        select bt.buytogether_number, bt.title, bt.content, bt.writeDate, bt.updateDate, bt.duedate, bt.join_number,
+				bt.price, addr.longitude, addr.latitude, addr.buytogether_address_sido, addr.buytogether_address_sigungu,
+				u.nickname, u.reputation, hs.status_name, ht.hunting_type
+		from  huntingtype ht,
+			 huntingstatus hs, user u 
+		left outer join joinin j on u.user_number = j.user_number and j.user_number = #{user_number},
+        buytogether bt
+        left outer join buytogetheraddress addr on addr.buytogether_number = bt.buytogether_number
+		where (hs.status_number = bt.status_number and
+			  ht.hunting_type_number = bt.hunting_type_number and hs.status_name = "같이사냥완료" and bt.user_number = u.user_number
+			  and u.user_number in (select user_number from buytogether where user_number = #{user_number}))
+              or
+              (hs.status_number = bt.status_number and
+			  ht.hunting_type_number = bt.hunting_type_number and
+			  hs.status_name = "같이사냥완료" and bt.buytogether_number = j.buytogether_number
+              and bt.buytogether_number in (select buytogether_number from joinin where user_number = #{user_number}))
+			]]>
+
+		<include refid="search"></include>
+			  
+		<![CDATA[
+		order by buytogether_number desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+
+	<!-- 내 개설한 같이사냥 서치카운트 -->
+	<select id="searchMyBuyTogetherCount" resultType="int">
+		select count(buytogether_number)
+		from buytogether bt
+		where
+		bt.user_number = #{user_number} and
+		(bt.status_number = 1 or
+		bt.status_number = 2 or bt.status_number = 4)
+
+		<include refid="search"></include>
+
+	</select>
+
+	<!-- 검색용 코드 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%') OR content
+				like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( content like CONCAT('%', #{keyword}, '%') OR writer
+				like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%')
+				OR
+				content
+				like CONCAT('%', #{keyword}, '%')
+				OR
+				writer like CONCAT('%',
+				#{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+
+	<!-- (개설한) 같이사냥 참여유저번호 조회 -->
+	<select id="searchJoinUser" resultType="Integer">
+		select j.user_number
+		from
+		joinin j
+		where j.user_number in
+		(select j.user_number from joinin where
+		j.buytogether_number =
+		#{myBuyTogetherNumber})
+	</select>
+
+	<!-- 내 같이사냥 평판조회 -->
+	<select id="reputationLog" resultType="int">
+		select reputation_number
+		from reputationLog where
+		score_user_number = #{user_number} and
+		scored_user_number = #{joinUserNumber} and
+		buytogether_number =
+		#{myBuyTogetherNumber}
+	</select>
+
+	<!-- 내가 개설한 같이사냥 참여자 조회 -->
+	<select id="openReputation" resultType="com.buy.together.domain.JoinUserInfo">
+		select u.nickname,
+		u.reputation, u.user_number from user u where
+		u.user_number in
+		(select
+		j.user_number from joinin j where j.buytogether_number
+		=#{buyTogetherNumber})
+	</select>
+
+	<!-- 평판 점수 주기 -->
+	<select id="scoreReputation">
+		update user set reputation=(reputation+#{score})
+		where user_number =
+		#{scored_user_number}
+	</select>
+
+	<!-- (개설한) 유저번호 추출 -->
+	<select id="readUserNumber" resultType="int">
+		select user_number from
+		buytogether where buytogether_number =
+		#{buyTogetherNumber}
+	</select>
+
+	<!-- 평판 기록 남기기 -->
+	<select id="writeReputation">
+		insert into reputationlog (score_user_number,
+		scored_user_number,
+		buytogether_number) values
+		(#{score_user_number},#{scored_user_number},#{buyTogetherNumber})
+	</select>
+
+	<!-- 같이사냥 완료하기 -->
+	<select id="finishBuyTogether">
+		update buytogether set status_number = '3' where
+		buyTogether_number =
+		#{buyTogetherNumber}
+	</select>
+
+	<!-- 내가 참여한 같이사냥 개설자 조회 -->
+	<select id="joinReputation" resultType="com.buy.together.domain.JoinUserInfo">
+		select u.nickname,
+		u.reputation, u.user_number from user u where
+		u.user_number =
+		(select
+		bt.user_number from buytogether bt where bt.buytogether_number =
+		#{buyTogetherNumber})
+	</select>
+
+	<!-- 내 참여한 같이사냥 서치카운트 -->
+	<select id="searchJoinBuyTogetherCount" resultType="int">
+		select count(joinin_number)
+		from joinin j, buytogether bt
+		where
+		j.user_number = #{user_number} and bt.buytogether_number =
+		j.buytogether_number and
+		(bt.status_number = 1 or bt.status_number = 2 or bt.status_number = 4)
+
+		<include refid="search"></include>
+
+	</select>
+
+	<!-- 내 완료한 같이사냥 서치카운트1 -->
+	<select id="searchDoneBuyTogetherCount1" resultType="int">
+		select count(buytogether_number)
+		from buytogether bt
+		where
+		bt.user_number = #{user_number} and
+		bt.status_number = 3
+
+		<include refid="search"></include>
+
+	</select>
+
+	<!-- 내 완료한 같이사냥 서치카운트2 -->
+	<select id="searchDoneBuyTogetherCount2" resultType="int">
+		select count(joinin_number)
+		from joinin j, buytogether bt
+		where
+		j.user_number = #{user_number} and bt.buytogether_number =
+		j.buytogether_number and
+		bt.status_number = 3
+
+		<include refid="search"></include>
+
+	</select>
+</mapper>
+
+
+

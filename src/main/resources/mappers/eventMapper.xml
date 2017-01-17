@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mappers.eventMapper">
+
+	<!-- 정보사냥 게시글의 사진조회 -->
+	<select id="eventPhotoList" resultType="attachedPhoto">
+		select *
+		from
+		attachedphoto
+		where board_type_number = 3 and board_number =
+		#{board_number}
+		order by photo_number desc
+	</select>
+
+	<!-- 정보사냥 	목록 -->
+	<select id="eventListAll" resultType="com.buy.together.dto.BoardDTO">
+      <![CDATA[
+		select bd.board_number, bd.board_title, bd.board_content, ad.admin_nickname
+		from board bd, admin ad
+		where board_type_number = 3 and bd.admin_number = ad.admin_number
+         ]]>
+
+		<include refid="search"></include>
+           
+      <![CDATA[
+      order by board_number desc
+      limit #{pageStart}, #{perPageNum}
+      ]]>
+	</select>
+
+	<!-- 정보사냥 조회 -->
+	<select id="eventListOne" resultType="com.buy.together.dto.BoardDTO">
+		select bd.board_number,
+		bd.board_title, bd.board_content, ad.admin_nickname
+		from board bd,
+		admin ad
+		where board_number = #{board_number} and bd.admin_number =
+		ad.admin_number
+		
+	</select>
+
+	<!-- 정보사냥 카운트 -->
+	<select id="searchEventListCount" resultType="int">
+		<![CDATA[
+		select count(board_number)
+		from board
+		where board_number > 0 and board_type_number = 3
+]]>
+		<include refid="search"></include>
+
+	</select>
+
+	<!-- 검색용코드 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				<!-- and title like CONCAT('%', #{keyword}, '%') -->
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and board_content like CONCAT('%', #{keyword}, '%')
+			</if>
+
+			<if test="searchType == 'tc'.toString()">
+				and ( board_title like CONCAT('%', #{keyword}, '%') OR 
+				board_content like CONCAT('%', #{keyword}, '%'))
+			</if>
+
+		</if>
+	</sql>
+
+</mapper>
+
+
