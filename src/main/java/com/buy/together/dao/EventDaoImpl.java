@@ -1,6 +1,5 @@
 package com.buy.together.dao;
 
-
 import java.util.List;
 
 import javax.inject.Inject;

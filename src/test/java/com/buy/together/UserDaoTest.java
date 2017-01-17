@@ -144,7 +144,6 @@ public class UserDaoTest {
       
       user.setName("user1");
       user.setEmail("user1@user1");
-      user.setId("user1");
       
       userPassword = userDao.findPassword(user);
       

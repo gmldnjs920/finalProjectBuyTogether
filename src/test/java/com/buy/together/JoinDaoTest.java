@@ -29,7 +29,6 @@ public class JoinDaoTest {
 
 		User user = new User();
 
-		user.setId("user01");
 		user.setPw("u01");
 		user.setName("김권식");
 		user.setNickname("김권식쨩");

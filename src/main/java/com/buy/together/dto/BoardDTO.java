@@ -21,31 +21,21 @@ public class BoardDTO {
 
 	}
 
-	
-	
 	public List<AttachedPhoto> getPath() {
 		return path;
 	}
-
-
 
 	public void setPath(List<AttachedPhoto> path) {
 		this.path = path;
 	}
 
-
-
 	public String getAdmin_nickname() {
 		return admin_nickname;
 	}
 
-
-
 	public void setAdmin_nickname(String admin_nickname) {
 		this.admin_nickname = admin_nickname;
 	}
-
-
 
 	public int getBoard_number() {
 		return board_number;
@@ -102,7 +92,5 @@ public class BoardDTO {
 	public void setBoard_type_number(int board_type_number) {
 		this.board_type_number = board_type_number;
 	}
-
-
 
 }
