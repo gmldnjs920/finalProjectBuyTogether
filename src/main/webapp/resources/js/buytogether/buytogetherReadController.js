@@ -9,6 +9,26 @@ function buytogetherReadController() {
 	this.requestRead = function(buytogether_number) {
 		
 		var data = dao.readDao(buytogether_number);
+		
+		var dateObj = new Date(data.duedate);
+		var year = dateObj.getFullYear();
+		var month = dateObj.getMonth() + 1;
+		var date = dateObj.getDate();
+		var duedate = year+"/"+month+"/"+date;
+		
+		//조회 append
+		$("#title").html(data.title);
+		$("#buytogether_number").html(data.buytogether_number);
+		$("#duedate").html(duedate);
+		$("#join_number").html(data.join_number);
+		$("#joinin_user").html(data.joinin_user);
+		$("#price").html(data.price);
+		$("#address_road").html(data.buytogether_address_road_address);
+		$("#address_detail").html(data.buytogether_address_detail);
+		$('#contentHTML').html(data.content);
+		$("#nickname").html(data.nickname);
+		$("#status_name").html(data.status_name);
+		$("#reputation").html(data.reputation);
 
 		if(data == undefined) {
 			document.location = '/error';
@@ -23,6 +43,7 @@ function buytogetherReadController() {
 				$('#thumb'+(i+1)).attr("src","/resources/img/noImage.png");
 				
 			}
+			
 		} else {
 		
 			var size = data.photo_path.length;
@@ -79,7 +100,7 @@ function buytogetherReadController() {
 
 	}
 
-	// 같이사냥 댓글,답글 수정 부분
+	// 같이사냥 댓글, 답글 수정 부분
 	this.requestCommentUpdate = function(buytogether_number, comment_number, comment_content, comment_type_number){
 
 		dao.commentUpdateDao(buytogether_number, comment_number, comment_content, comment_type_number);
@@ -142,15 +163,17 @@ function buytogetherReadController() {
 	// 같이사냥 댓글 신고버튼
 	this.requestCommentReport = function(buytogether_number, comment_number){
 
-		dao.commentReportDao(buytogether_number, comment_number);
+		var data = dao.commentReportDao(buytogether_number, comment_number);
 		
+		$("#comment_content").html(data.comment_content);
+		$("#nickname").html(data.nickname);
 
 	}
 	
 	// 신고페이지 신고버튼 클릭
 	this.requestSendReport = function(reportData){
 		
-		return dao.sendReportDao(reportData);
+		dao.sendReportDao(reportData);
 			
 	}
 	

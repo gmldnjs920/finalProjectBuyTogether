@@ -1,10 +1,5 @@
-drop database buytogether;
-
-
+-- drop database buytogether;
 create database buytogether;
-
-
-
 
 use buytogether;
 -- drop table access cascade CONSTRAINTS;
@@ -18,14 +13,8 @@ CREATE TABLE access (
 	access_duedate       INTEGER     NULL,      -- 제한날짜수
 
 
-
-
 	primary key(access_number)
 );
-
-
-
-
 
 
 
@@ -33,25 +22,20 @@ CREATE TABLE access (
 -- 유저
 CREATE TABLE user (
 	user_number      INTEGER      NOT NULL auto_increment, -- 유저번호
-	id               VARCHAR(12)  NOT NULL unique,     -- 아이디
-	pw               VARCHAR(60)  NULL,     -- 비밀번호
+	pw               VARCHAR(64)  NULL,     -- 비밀번호
 	name             VARCHAR(8)   NOT NULL,     -- 이름
 	email            VARCHAR(20)  NOT NULL unique,     -- 이메일
-	phone_number     VARCHAR(11)  NOT NULL,     -- 전화번호
-	birthdate         DATE         NOT NULL,     -- 생년월일
-	gender           VARCHAR(2)   NOT NULL,     -- 성별
-	nickname         VARCHAR(10)  NOT NULL unique,     -- 닉네임
+	phone_number     VARCHAR(11)  NULL,     -- 전화번호
+	birthdate         DATE         NULL,     -- 생년월일
+	gender           VARCHAR(2)   NULL,     -- 성별
+	nickname         VARCHAR(10)  NULL unique,     -- 닉네임
 	profile          VARCHAR(100) NULL,     -- 프로필사진
 	reputation       INTEGER      NOT NULL default 70,     -- 평판
-
-
 
 
 	primary key (user_number)
 	
 );
-
-
 
 
 -- 카테고리
@@ -60,12 +44,8 @@ CREATE TABLE category (
 	category_name   VARCHAR(20) NULL,      -- 카테고리명
 
 
-
-
 	primary key (category_number)
 );
-
-
 
 
 -- 관심
@@ -75,33 +55,10 @@ CREATE TABLE interest (
 	category_number INTEGER NULL,      -- 카테고리번호
 
 
-
-
 	primary key (interest_number),
 	foreign key (user_number) references user (user_number) on delete cascade,
 	foreign key (category_number) references category (category_number) on delete cascade
 );
-
-
-
-
--- 관리자
-CREATE TABLE admin (
-	admin_number      INTEGER     NOT NULL auto_increment, -- 관리자번호
-	admin_id          VARCHAR(10) NOT NULL unique,     -- 아이디
-	admin_pw          VARCHAR(60) NOT NULL,     -- 비밀번호
-	admin_nickname    VARCHAR(10) NOT NULL unique,     -- 닉네임
-	admin_email       VARCHAR(20) NOT NULL,     -- 이메일
-	admin_phonenumber VARCHAR(11) NOT NULL,     -- 전화번호
-	admin_grade       INTEGER     NOT NULL,     -- 관리자등급
-
-
-
-
-	primary key (admin_number)
-);
-
-
 
 
 -- Q&A
@@ -115,17 +72,11 @@ CREATE TABLE qna (
 	admin_number  INTEGER     NULL,      -- 관리자번호
 
 
-
-
 	primary key (qna_number),
 	foreign key (user_number) references user (user_number) on delete cascade,
-	foreign key (admin_number) references admin (admin_number) on delete set null,
+	foreign key (admin_number) references user(user_number) on delete cascade,
 	foreign key (qna_parent_number) references qna(qna_number) on delete cascade
 );
-
-
-
-
 
 
 
@@ -136,16 +87,8 @@ CREATE TABLE matching (
 	matching_status_name   VARCHAR(6) NULL,     -- 선택상태명
 
 
-
-
 	primary key (matching_status_number)
 );
-
-
-
-
-
-
 
 
 
@@ -158,14 +101,8 @@ CREATE TABLE huntingtype (
 	hunting_type        VARCHAR(8) NULL,      -- 사냥방식명
 
 
-
-
 	primary key (hunting_type_number)
 );
-
-
-
-
 
 
 
@@ -176,12 +113,8 @@ CREATE TABLE huntingstatus (
 	status_name   VARCHAR(20) NULL,      -- 상태명
 
 
-
-
 	primary key (status_number)
 );
-
-
 
 
 -- 같이사냥
@@ -200,16 +133,12 @@ CREATE TABLE buytogether (
 	hunting_type_number INTEGER      NOT NULL,      -- 사냥방식번호
 
 
-
-
 	primary key (buytogether_number),
 	foreign key (category_number) references category (category_number) on delete set null,
 	foreign key (user_number) references user (user_number) on delete cascade,
 	foreign key (status_number) references huntingstatus (status_number) on delete cascade,
 	foreign key (hunting_type_number) references huntingtype (hunting_type_number) on delete cascade
 );
-
-
 
 
 -- 사냥찜
@@ -219,14 +148,10 @@ CREATE TABLE dip (
 	buytogether_number INTEGER NOT NULL,      -- 같이사냥번호
 
 
-
-
 	primary key (dip_number),
 	foreign key (user_number) references user (user_number) on delete cascade,
 	foreign key (buytogether_number) references buytogether (buytogether_number) on delete cascade
 );
-
-
 
 
 -- 참여
@@ -237,20 +162,11 @@ CREATE TABLE joinin (
 	buytogether_number  INTEGER NULL,      -- 같이사냥번호
 
 
-
-
 	primary key (joinin_number),
 	foreign key (user_number) references user (user_number) on delete cascade,
 	foreign key (matching_status_number) references matching (matching_status_number) on delete cascade,
 	foreign key (buytogether_number) references buytogether (buytogether_number) on delete set null
 );
-
-
-
-
-
-
-
 
 -- 댓글분류
 CREATE TABLE commenttype (
@@ -258,12 +174,8 @@ CREATE TABLE commenttype (
 	comment_type_name   VARCHAR(10) NOT NULL,      -- 댓글분류명
 
 
-
-
 	primary key (comment_type_number)
 );
-
-
 
 -- 댓글
 CREATE TABLE comment (
@@ -276,8 +188,6 @@ CREATE TABLE comment (
 	comment_type_number INTEGER NOT NULL,      -- 댓글분류번호
 
 
-
-
 	primary key (comment_number),
 	foreign key (buytogether_number) references buytogether (buytogether_number) on delete cascade,
 	foreign key (user_number) references user (user_number) on delete cascade,
@@ -287,25 +197,14 @@ CREATE TABLE comment (
 );
 
 
-
-
 -- 신고카테고리
 CREATE TABLE declarecategory (
 	declare_category_number INTEGER     NOT NULL auto_increment, -- 신고카테고리번호
 	declare_category_name   VARCHAR(20) NOT NULL,      -- 카테고리명
 
 
-
-
 	primary key (declare_category_number)
 );
-
-
-
-
-
-
-
 
 -- 신고글분류
 CREATE TABLE declaretype (
@@ -313,12 +212,8 @@ CREATE TABLE declaretype (
 	type        VARCHAR(6) NOT NULL,      -- 분류
 
 
-
-
 	primary key (type_number)
 );
-
-
 
 
 -- 신고글
@@ -334,8 +229,6 @@ CREATE TABLE declareboard (
 	declare_status          BOOLEAN      NOT NULL default false,      -- 처리상태
 
 
-
-
 	primary key (declare_number),
 	foreign key (buytogether_number) references buytogether (buytogether_number) on delete set null,
 	foreign key (comment_number) references comment (comment_number) on delete set null,
@@ -344,18 +237,7 @@ CREATE TABLE declareboard (
 	foreign key (type_number) references declaretype (type_number) on delete cascade
 
 
-
-
 );
-
-
-
-
-
-
-
-
-
 
 -- 게시판종류(공지,FAQ,정보사냥,튜토리얼,같이사냥)
 CREATE TABLE boardtype (
@@ -363,16 +245,8 @@ CREATE TABLE boardtype (
 	board_name        VARCHAR(10) NOT NULL unique,     -- 게시판이름
 
 
-
-
 	primary key (board_type_number)
 );
-
-
-
-
-
-
 
 
 -- 게시판(공지,FAQ,정보사냥,튜토리얼)
@@ -382,23 +256,16 @@ CREATE TABLE board (
 	board_content     TEXT        NOT NULL,     -- 내용
 	board_writedate   timestamp        NOT NULL default now(),     -- 작성시간
 	board_updatedate  timestamp        NULL,     -- 수정시간
-	admin_number      INTEGER     NULL,     -- 관리자번호
+	user_number      INTEGER     NULL,     -- 관리자번호
 	board_type_number INTEGER     NOT NULL,      -- 게시판종류번호
 
 
-
-
 	primary key (board_number),
-	foreign key (admin_number) references admin (admin_number) on delete set null,
+	foreign key (user_number ) references user (user_number ) on delete set null,
 	foreign key (board_type_number) references boardtype (board_type_number) on delete cascade
 
 
-
-
 );
-
-
-
 
 -- 첨부사진
 CREATE TABLE attachedphoto (
@@ -407,8 +274,6 @@ CREATE TABLE attachedphoto (
 	board_number       INTEGER      NULL,     -- 게시글번호
 	buytogether_number INTEGER	 NULL,
 	board_type_number  INTEGER      NOT NULL,     -- 게시판종류번호
-
-
 
 
 	primary key (photo_number),
@@ -420,22 +285,14 @@ CREATE TABLE attachedphoto (
 
 
 
-
-
-
-
 -- 검색
 CREATE TABLE search (
 	keyword_number INTEGER     NOT NULL auto_increment, -- 키워드번호
 	keyword        VARCHAR(100) NOT NULL unique,      -- 키워드
 
 
-
-
 	primary key (keyword_number)
 );
-
-
 
 
 -- 유저주소
@@ -443,12 +300,7 @@ CREATE TABLE useraddress (
 	user_address_number INTEGER     NOT NULL auto_increment, -- 주소번호
 	user_sido           VARCHAR(20) NOT NULL,     -- 시/도
 	user_sigungu        VARCHAR(20) NOT NULL,     -- 시/군/구
-	user_road_address   VARCHAR(20) NOT NULL,     -- 도로명
-	user_detail         VARCHAR(50) NULL,     -- 상세주소
 	user_number         INTEGER     NOT NULL,      -- 유저번호
-
-
-
 
 	primary key (user_address_number),
 	foreign key (user_number) references user (user_number) on delete cascade
@@ -460,8 +312,8 @@ CREATE TABLE useraddress (
 -- 같이사냥주소
 CREATE TABLE buytogetheraddress (
 	buytogether_address_number       INTEGER      NOT NULL auto_increment, -- 주소번호
-	latitude                         INTEGER      NOT NULL,     -- 위도
-	longitude                        INTEGER      NOT NULL,     -- 경도
+	latitude                         double     NOT NULL,     -- 위도
+	longitude                        double     NOT NULL,     -- 경도
 	buytogether_address_sido         VARCHAR(10)  NOT NULL,     -- 시/도
 	buytogether_address_sigungu      VARCHAR(10)  NOT NULL,     -- 시/군/구
 	buytogether_address_road_address VARCHAR(100) NOT NULL,     -- 도로명
@@ -469,13 +321,9 @@ CREATE TABLE buytogetheraddress (
 	buytogether_number               INTEGER      NOT NULL,      -- 같이사냥번호
 
 
-
-
 	primary key (buytogether_address_number),
 	foreign key (buytogether_number) references buytogether (buytogether_number) on delete cascade
 );
-
-
 
 
 -- 신고유저
@@ -490,13 +338,25 @@ CREATE TABLE declareuser (
     foreign key (access_number) references access (access_number) on delete cascade
 
 
-
-
 );
+
+-- 평판 기록
+create table reputationlog (
+				reputation_number integer NOT NULL auto_increment,
+                score_user_number integer NOT NULL,
+                scored_user_number integer NOT NULL,
+                buytogether_number integer NOT NULL,
+                
+                primary key (reputation_number),
+                foreign key (buytogether_number) references buytogether (buytogether_number) on delete cascade,
+                foreign key (score_user_number) references user (user_number) on delete cascade,
+                foreign key (scored_user_number) references user (user_number) on delete cascade
+                
+              );
+
 
 
 -- inset 쿼리
-
 
 
 -- access (-1은 탈퇴를 의미한다.)
@@ -510,26 +370,31 @@ insert into access(access_name, access_declare_count, access_duedate)
 values("경고횟수10", 10, -1);
 
 -- user 
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user1", "user1", "user1", "user1@user1", "111", "1994-04-06", "M", "희원찡", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user2", "user2", "user2", "user2@user2", "222", "1994-02-02", "M", "양갱갱", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user3", "user3", "user3", "user3@user3", "333", "1994-03-03", "M", "소희짱", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user4", "user4", "user4", "user4@user4", "444", "1994-04-04", "M", "수리수리", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user5", "user5", "user5", "user5@user5", "555", "1994-05-05", "M", "갤갤갤", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user6", "user6", "user6", "user6@user6", "666", "1994-06-06", "M", "성유니", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user7", "user7", "user7", "user7@user7", "777", "1997-07-07", "M", "디마", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user8", "user8", "user8", "user8@user8", "888", "1998-08-08", "M", "888", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user9", "user9", "user9", "user9@user9", "999", "1994-09-09", "M", "팀리더", null);
-insert into user(id, pw, name, email, phone_number, birthdate, gender, nickname, profile) 
-values("user10", "user10", "user10", "user10@user10", "10", "1990-04-06", "M", "000", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("0A041B9462CAA4A31BAC3567E0B6E6FD9100787DB2AB433D96F6D178CABFCE90", "user1", "user1@user1", "111", "1994-04-06", "M", "희원찡", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user2", "user2", "user2@user2", "222", "1994-02-02", "M", "양갱갱", null);
+insert into user( pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user3", "user3", "user3@user3", "333", "1994-03-03", "M", "소희짱", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values( "user4", "user4", "user4@user4", "444", "1994-04-04", "M", "수리수리", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user5", "user5", "user5@user5", "555", "1994-05-05", "M", "갤갤갤", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user6", "user6", "user6@user6", "666", "1994-06-06", "M", "성유니", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user7", "user7", "user7@user7", "777", "1997-07-07", "M", "디마", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user8", "user8", "user8@user8", "888", "1998-08-08", "M", "888", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user9", "user9", "user9@user9", "999", "1994-09-09", "M", "팀리더", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile) 
+values("user10", "user10", "user10@user10", "10", "1990-04-06", "M", "000", null);
+-- admin (1=전체관리자)
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile)
+values("admin1", "admin1", "admin1@admin1.com", "12121", "1994-12-12", "F", "총관리자", null);
+insert into user(pw, name, email, phone_number, birthdate, gender, nickname, profile)
+values("admin2", "admin2", "admin2@admin2.com", "1111", "1994-12-12", "F", "부관리자", null);
 
 -- category
 insert into category(category_number, category_name)
@@ -571,11 +436,6 @@ values(8,3);
 insert into interest(user_number, category_number)
 values(10,1);
 
--- admin (1=전체관리자)
-insert into admin(admin_id, admin_pw, admin_nickname, admin_email, admin_phonenumber, admin_grade)
-values("admin1", "admin1", "admin1", "admin1@admin1.com", 12345, 1);
-insert into admin(admin_id, admin_pw, admin_nickname, admin_email, admin_phonenumber, admin_grade)
-values("admin2", "admin2", "admin2", "admin2@admin2.com", 12345, 2);
 
 -- qna
 insert into qna(qna_title, qna_content, user_number)
@@ -587,7 +447,7 @@ values("정보 사냥을 할때.. ", "저에게는 정보를 안주세요?ㅡㅡ
 insert into qna(qna_title, qna_content, user_number)
 values("제 평판이...", "왜 내려갔오용?;;", 9);
 
-insert into qna(qna_parent_number, qna_title, qna_content, admin_number)
+insert into qna(qna_parent_number, qna_title, qna_content, user_number)
 values(1, "고객님 .........", "제가 해드릴께요 ...", 2);
 
 
@@ -746,59 +606,57 @@ insert into boardtype(board_type_number, board_name)
 values(5, "같이사냥");
 
 -- board
-insert into board(board_title, board_content, admin_number, board_type_number)
+insert into board(board_title, board_content, user_number, board_type_number)
 values("공지사항", "우리사이트는 같이사는 사이트 입니다.", 2 , 1);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[사냥관련] FaQ 어떤 방식으로 사냥을 하는건가요.", "만나서 해야지", 2 , 2);
+insert into board(board_title, board_content, user_number, board_type_number)
+values("[사냥관련] FaQ 어떤 방식으로 사냥을 하는건가요?", "같이사냥 사이트로 들어가서 함께 사고 싶은 사람들을 찾으면 되요.", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[사냥관련] FaQ 사냥 이 뭐죠?", "사냥 사냥", 2 , 2);
+insert into board(board_title, board_content, user_number, board_type_number)
+values("[사냥관련] FaQ 사냥이 무엇이죠?", "사냥이란 다른 사람들과 공동 구매하는 거에요.", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[정보관련] FaQ", "어떤 방식으로 사냥을 하는건가요.", 2 , 2);
+insert into board(board_title, board_content, user_number, board_type_number)
+values("[회원관련] FaQ 회원가입은 어떻게하는 거죠?", "회원가입은 우측 상단에 회원가입 버튼을 클릭해서 다 입력하세요", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[정보관련] FaQ", "어떤 방식으로 사냥을 하는건가요.", 2 , 2);
+insert into board(board_title, board_content, user_number, board_type_number)
+values("[회원관련] FaQ 회원은 누구누구에요?", "회원은 알려드릴수 없어요.", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[고객센터] FaQ", "어떤 방식으로 사냥을 하는건가요.", 2 , 2);
+insert into board(board_title, board_content, user_number, board_type_number)
+values("[정보관련] FaQ 정보는 어디에서 보는거에요?", "정보사이트로 들어가시면 정보들을 보실수 있어요", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[고객센터] FaQ 고객센터 질문", "고객센터 고객센터.", 2 , 2);
+insert into board(board_title, board_content, user_number, board_type_number)
+values("[정보관련] FaQ 정보사이트에서 얻을수 있는 정보가 무엇이죠??", "정보사이트에서는 정보들을 볼수 있죠;;", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[회원관련] FaQ 회원이 뭐죠?", "회원은 이거다", 2 , 2);
+insert into board(board_title, board_content, user_number, board_type_number)
+values("[고객센터] FaQ 고객센터 이용시간은 어떻게 되요??", "AM09:00 ~ pm17:00 까지에요.", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
-values("[회원관련] FaQ 어떤 방식으로 회원을 하는건가요", "회원회원.", 2 , 2);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
+insert into board(board_title, board_content, user_number, board_type_number)
 values("정보사냥", "지금 이마트 1+1 데이!!", 2 , 3);
 
-insert into board(board_title, board_content, admin_number, board_type_number)
+insert into board(board_title, board_content, user_number, board_type_number)
 values("튜토리얼", "잘 따라 하세요.", 2 , 4);
 
 -- attachedphoto
 insert into attachedphoto(photo_number, path, buytogether_number, board_type_number)
-values(1, "C:\picture/2015-07-18_11;34;39.jpg", 1, 5);
+values(1, "C:\\picture/2015-07-18_11;34;39.jpg", 1, 5);
 
 insert into attachedphoto(photo_number, path, board_number, board_type_number)
-values(2, "C:\picture/2015-07-18_11;34;39.jpg", 3, 3);
+values(2, "C:\\picture/2015-07-18_11;34;39.jpg", 3, 3);
 
-update attachedphoto set path = "C:\\picture/2015-07-18_11;34;39.jpg" where photo_number = 2;
-update attachedphoto set path = "C:\\picture/2015-07-18_11;34;39.jpg" where photo_number = 2;
+update attachedphoto set path = "C:\\picture/2015-07-18_11;34;39.jpg" where photo_number=2;
+update attachedphoto set path = "C:\\picture/2015-07-18_11;34;39.jpg" where photo_number=2;
 
 -- search
 insert into search(keyword)
 values("햄버거");
 
 -- useraddress
-insert into useraddress(user_sido, user_sigungu, user_road_address, user_number)
-values("경기", "부천시 원미구", "부천시 원미구 상동로", 7);
+insert into useraddress(user_sido, user_sigungu, user_number)
+values("경기", "부천시 원미구", 7);
 
-insert into useraddress(user_sido, user_sigungu, user_road_address, user_number)
-values("인천시", "남동구", "인천시 남동구 장승남로", 4);
+insert into useraddress(user_sido, user_sigungu, user_number)
+values("인천시", "남동구", 4);
 
 -- buytogetheraddress
 insert into buytogetheraddress(latitude, longitude, buytogether_address_sido, buytogether_address_sigungu, buytogether_address_road_address, buytogether_address_detail, buytogether_number)
@@ -837,5 +695,3 @@ values(35.827981, 127.1199938, "전라북도", "전주", "전라북도 전주시
 -- declareuser
 insert into declareuser(user_number, delcare_count)
 values(2, 1);
-
-update user set pw="03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4" where user_number=1; 

@@ -16,13 +16,8 @@ function buytogetherReadDao() {
 			dataType : 'json',
 			success : function(data){
 
-				var listOneTemplate = Handlebars.compile($('#listOneTemplate').html());
-
-				var listOneHtml = listOneTemplate(data);
-
-				$("#buyTogetherListOne").html(listOneHtml);
-
 				re = data;
+				
 			}
 
 		});
@@ -237,7 +232,7 @@ function buytogetherReadDao() {
 		return reData;
 	}
 
-	//	같이 사냥 댓글 삭제
+	// 같이 사냥 댓글 삭제
 	this.commentDeleteDao = function(buytogether_number, comment_number){
 
 		$.ajax({
@@ -404,11 +399,14 @@ function buytogetherReadDao() {
 		});
 
 		return result;
+		
 	}
 
 	// 댓글 신고 작성자  / 내용 가지고오기
 	this.commentReportDao = function(buytogether_number, comment_number){
 
+		var data;
+		
 		$.ajax({
 			
 			type : 'get',
@@ -421,16 +419,12 @@ function buytogetherReadDao() {
 			dataType : 'json',
 			success : function(result){
 				
-				var reportsTemplate = Handlebars.compile($(".reportsTemplate").html());
-
-				var reportHtml = reportsTemplate(result);
-
-				$("#reports").html(reportHtml);
-
+				data = result;
+				
 			}
-
 		});
 
+		return data;
 
 	}
 

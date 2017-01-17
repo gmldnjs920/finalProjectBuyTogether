@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.sql.rowset.serial.SerialStruct;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;

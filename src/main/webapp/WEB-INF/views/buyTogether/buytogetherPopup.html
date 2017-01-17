@@ -71,7 +71,22 @@
 				<div class="panel-body">
 
 					<!-- 제목 / 작성자 / data + template -->
-					<div class="row" id="reports"></div>
+					<div class="row" id="reports">
+					
+						<br>
+						<form>
+							<div class="form-group col-xs-12">
+								<label class="c-font-18 c-font-sbold">제&nbsp;&nbsp;&nbsp;목
+									:&nbsp;</label> <span class="c-font-16 c-font-black" id="comment_content"></span>
+							</div>
+							<div class="form-group col-xs-12">
+								<label class="c-font-18 c-font-sbold">닉네임 :&nbsp;</label> <span
+									class="c-font-16 c-font-black" id="nickname"></span>
+							</div>
+						</form>
+						
+
+					</div>
 					<div class="c-content-divider c-theme-bg"></div>
 
 					<!-- 사유선택 -->
@@ -175,23 +190,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- 신고 대상 정보 -->
-	<script type="text/x-handlebars-template" class="reportsTemplate">
-<br>
-						<form>
-							<div class="form-group col-xs-12">
-								<label class="c-font-18 c-font-sbold">제&nbsp;&nbsp;&nbsp;목
-									:</label> <span class="c-font-16 c-font-black">&nbsp; {{comment_content}}</span>
-							</div>
-							<div class="form-group col-xs-12">
-								<label class="c-font-18 c-font-sbold">닉네임 :</label> <span
-									class="c-font-16 c-font-black">&nbsp; {{nickname}} </span>
-							</div>
-						</form>
-
-	</script>
-
 	<script src="/resources/theme/js/jquery.min.js" type="text/javascript"></script>
 	<script src="/resources/theme/js/jquery-migrate.min.js"
 		type="text/javascript"></script>

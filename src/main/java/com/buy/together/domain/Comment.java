@@ -9,6 +9,7 @@ public class Comment {
 	private Date comment_writedate;
 	private int buytogether_number;
 	private int user_number;
+	private String nickname;
 	private int comment_type_number;
 	private int comment_parent_number;
 
@@ -44,6 +45,14 @@ public class Comment {
 		this.user_number = user_number;
 		this.comment_type_number = comment_type_number;
 		
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getComment_number() {

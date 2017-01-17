@@ -10,7 +10,7 @@ $(document).ready(function() {
 	var user_number = sessionStorage.getItem("number");
 
 	// 게시판 넘버
-	var buytogether_number =  $(location).attr('search');
+	var buytogether_number = $(location).attr('search');
 	var searchKeyword = buytogether_number.split("?buytogether_number=");
 	buytogether_number = searchKeyword[1];
 
@@ -19,7 +19,6 @@ $(document).ready(function() {
 
 	// BUYTOGETHER READ PAGE
 	var readData = controller.requestRead(buytogether_number);
-	$('#contentHTML').html(readData.content);
 	
 	if(readData.status_name == '같이사냥중' || readData.status_name == '같이사냥완료' || readData.status_name == '같이사냥실패'){
 		$('.buy_together_btn').attr("disabled",true);
@@ -31,7 +30,8 @@ $(document).ready(function() {
 	if(user_number != readData.user_number){
 
 		data = controller.requestBuytogetherCheck(buytogether_number, user_number);
-	}
+		
+	} 
 	
 	// 게시글 등록자가 조회에서 사냥 참여자 있을 시, 같이사냥 버튼 CHECK로 바꿈
 	if(user_number == readData.user_number){
@@ -75,17 +75,20 @@ $(document).ready(function() {
 					
 				});
 				var result = controller.requestJoinCheckBtn(buytogether_number, joinCheck_userNumber);
+				
 				if(result == 'success') {
 					document.location = '/buyTogether/read?buytogether_number='+buytogether_number;
 				}
 			});
 
 		});
+		
 	} else {
 
 		// 게시글 등록한 사람이 글 조회시  UPDATE, DELETE 버튼이 안보여야 한다.
 		$(".buytogether_delete_btn").hide();
 		$(".buytogether_update_btn").hide();
+		
 	}
 	
 	var dip;
@@ -123,7 +126,7 @@ $(document).ready(function() {
 		}
 	});
 
-	// 전체 댓글 Tap
+	// 댓글 Tap
 	$("#tapAllList").on("click", function() {
 
 		//전체참여 번호
@@ -204,7 +207,7 @@ $(document).ready(function() {
 
 		});
 
-		//전체 답글 리스트 부분
+		// 전체 답글 리스트 부분
 		$("#comment_List").on("click", ".recommentList_Btn_A", function() {
 
 			var reply = $(this).parent();
@@ -231,10 +234,23 @@ $(document).ready(function() {
 
 				} 
 			}
+			
 		});
 
-		controller.requestCommentList(buytogether_number, comment_type_number);
+		// 댓글 리스트
+		var commentData = controller.requestCommentList(buytogether_number, comment_type_number);
 
+		// 로그인 사용자와 댓글 등록 사용자가 미동일시 삭제, 수정버튼 숨기기
+		if(user_number != commentData.user_number){
+			
+			$(".dellupdate").hide();
+			
+		} else if(user_number == commnetData.user_number){
+			
+			$(".delupate").show();
+			
+		}
+		
 	});
 
 	// 참여자 댓글 Tap

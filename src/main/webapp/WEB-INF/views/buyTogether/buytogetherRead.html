@@ -187,7 +187,173 @@
 						</div>
 
 						<!------------- Template 글 조회 부분 ------------>
-						<div class="col-md-6" id="buyTogetherListOne"></div>
+						<div class="col-md-6" id="buyTogetherListOne">
+
+							<!-- 1.10 수정 시작 -->
+							<!-- 조회 내용 -->
+							<div class="c-product-meta" style="height: 600px;">
+								<div class="c-content-title-1">
+
+									<!-- 타이틀 -->
+									<h3 class="c-font-uppercase c-font-bold" id="title"></h3>
+
+									<!-- url 공유하기, 찜하기 버튼 -->
+									<div id="iconDiv">
+										<label class="iconClass"> <span
+											class="icon-social-facebook c-font-22 c-font-white socicon-btn socicon-btn-circle socicon-solid c-bg-blue-3 c-bg-red-hover"
+											onclick="sharing();"></span>&nbsp;&nbsp; <span
+											class="c-font-20 c-font-blue-3 c-font-red-hover" id="urlCopy">URL
+												복사</span>&nbsp;&nbsp; <a href="#" class="dip_heratIcon"><span
+												id="heart"
+												class="icon-heart c-font-22 c-font-red-3 c-border-red"
+												value="red"></span></a>
+										</label>
+									</div>
+
+									<div class="c-product-rating">
+										<P class="c-description">
+											<label><strong class="c-font-20">게시글 번호: </strong></label>
+											&nbsp; <span class="c-font-22 c-font-bold"
+												id="buytogether_number"></span> <span class="c-font-20 c-font-bold">번</span>
+										</P>
+									</div>
+								</div>
+
+								<div class="c-product-review">
+
+									<!-- 마감일 -->
+									<div class="c-description">
+										<P class="c-description c-font-20 c-font-blue">
+											<strong>마감일:&nbsp;</strong> <strong id="duedate"></strong>
+										</P>
+									</div>
+									<br>
+
+									<!-- 참여정원/참여인원 -->
+									<div class="c-description">
+										<P>
+											<label><strong class="c-font-20">총원 / 참여:</strong></label>
+											&nbsp;<span class="c-font-20 c-font-bold" id="join_number"></span>
+											&nbsp;<span class="c-font-20">/</span> &nbsp;<span
+												class="c-font-20 c-font-bold" id="joinin_user"></span>
+										</P>
+									</div>
+								</div>
+
+								<!-- 가격 부분 -->
+								<div class="c-product-price">
+									<P class="c-description">
+										<label><strong class="c-font-20">가격: </strong></label> <span
+											class="c-font-18" id="price"></span> <span class="c-font-18">원</span>
+									</P>
+								</div>
+
+								<!-- 주소 부분 -->
+								<div class="c-product-address">
+									<p class="c-description">
+										<label><strong class="c-font-20 c-font-bold">주소:</strong></label>
+										<label><strong class="c-font-18" id="address_road">
+												&nbsp;</strong> <strong class="c-font-18" id="address_detail"></strong></label>
+										<br>
+									</p>
+								</div>
+
+								<!-- 내용 부분 -->
+								<div style="height: 190px;" class="c-product-short-desc">
+									<p class="c-description">
+										<strong class="c-font-20 c-font-bold">내용 : </strong>
+									</p>
+									<div class="c-font-14 c-font-uppercase" id="contentHTML">&emsp;&emsp;&emsp;</div>
+								</div>
+								<br>
+							</div>
+
+							<!-- 프로필 부분 -->
+							<div class="row">
+								<div class="c-wrapper c-bg-blue" style="height: 150px;">
+									<div
+										class="c-content c-border c-border-padding c-border-padding-right"
+										style="height: 150px;">
+										<div class="c-container">
+
+											<ul class="col-md-8 col-xs-8" style="list-style: none;">
+												<br>
+												<li>
+													<P class="c-description">
+														<label class="c-font-17 c-font-white"><span>닉네임:&nbsp;</span> <strong
+															id="nickname"></strong> </label>
+													</P>
+												</li>
+												<li>
+													<P class="c-description">
+														<label class="c-font-17 c-font-white"><span>사냥상태:&nbsp;</span><strong
+															id="status_name"></strong></label>
+													</P>
+												</li>
+												<li>
+													<P class="c-description">
+														<label class="c-font-17 c-font-white"><span>평판:&nbsp;</span><strong
+															id="reputation"></strong></label>
+													</P>
+												</li>
+											</ul>
+
+											<!-- 같이사냥 참여 버튼 -->
+											<div class="col-md-4 col-xs-4 buytogetherBtn">
+												<br> <br> <input type="button"
+													class="btn btn-md c-btn-white c-font-uppercase c-btn-square c-btn-border-1x buy_together_btn"
+													data-toggle="modal" id="buy_together_btn"
+													value="BUY TOGETHER" />
+
+												<!-- modal -->
+												<div class="modal fade bs-example-modal-sm" id="myModal"
+													tabindex="-1" role="dialog"
+													aria-labelledby="mySmallModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-md">
+														<div class="modal-content">
+															<div class="modal-body" id="modal-body">
+																<p class="c-font-red" id="msg">
+																	<span class="c-font-15">같이사냥에 참여 하셨습니다.</span>
+																</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button"
+																	class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase"
+																	data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="modal fade bs-example-modal-sm" id="myModal1"
+													tabindex="-1" role="dialog"
+													aria-labelledby="mySmallModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-md">
+														<div class="modal-content">
+															<div class="modal-body" id="modal-body">
+																<p class="c-font-red" id="msg">
+																	<span class="c-font-15">이미 참여하셨습니다.</span>
+																</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button"
+																	class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase"
+																	data-dismiss="modal" id="cancel">취소하기</button>
+																<button type="button"
+																	class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase"
+																	data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- 1.10 수정 시작(end) -->
+						</div>
 
 
 						<!-- 사냥 참여자 확인 리스트 및 등록 / 취소 모달 -->
@@ -219,7 +385,6 @@
 							<!-- 모달 끝 -->
 						</div>
 
-
 					</div>
 				</div>
 			</div>
@@ -236,11 +401,11 @@
 
 						<li role="presentation" class="active" id="tapAllList"><a
 							class="c-font-uppercase c-font-bold c-font-16" href="#tab-1"
-							role="tab" data-toggle="tab">전체댓글</a></li>
+							role="tab" data-toggle="tab">댓글</a></li>
 
 						<li role="presentation" id="tapChatList"><a
 							class="c-font-uppercase c-font-bold c-font-16" href="#tab-2"
-							role="tab" data-toggle="tab">참여자댓글</a></li>
+							role="tab" data-toggle="tab">참여자대화</a></li>
 					</ul>
 
 				</div>
@@ -367,186 +532,22 @@
 
 	<!----------------- Template ------------------->
 
-	<!---------------- 같이 사냥 글 조회 ----------------->
-	<script type="text/x-handlebars-template" id="listOneTemplate">
-
-<div class="c-product-meta" style="height: 600px;">
-    <div class="c-content-title-1">
-
-	    <h3 class="c-font-uppercase c-font-bold" id="title">{{title}}</h3>
-
-		<!-- url 공유하기, 찜하기 버튼 -->
-		<div id="iconDiv">
-		  <label class="iconClass">
-					
-			<span class="icon-social-facebook c-font-22 c-font-white socicon-btn socicon-btn-circle socicon-solid c-bg-blue-3 c-bg-red-hover" onclick="sharing();"></span>&nbsp;&nbsp;
-
-			<span class="c-font-20 c-font-blue-3 c-font-red-hover" id="urlCopy">URL 복사</span>&nbsp;&nbsp;
-
-			<a href="#" class="dip_heratIcon"><span id="heart" class="icon-heart c-font-22 c-font-red-3 c-border-red" value="red"></span></a>
-		  </label>
-		</div>
-		
-        <div class="c-product-rating">
-			<P class="c-description">
-				<label><strong class="c-font-20">게시글 번호: </strong></label>	
-				&nbsp; <span class="c-font-22 c-font-bold">{{buytogether_number}} 번</span> 
-			</P>
-		</div>
-
-    </div>
-
-	<div class="c-product-review">
-
-      <!-- 마감일 -->
-  	  <div class="c-product-rating">
-
-		<P class="c-description c-font-20 c-font-blue">
-			<strong>마감일: &nbsp {{dateHelper duedate}} <strong>
-		</P>
-
-  	  </div>
-
-	 <!-- 참여정원/참여인원 -->
-	   <div class="c-product-rating">
-
-		<P class="c-description">
-			<label><strong class="c-font-20">총원/참여:<strong></label>
-			&nbsp; <span class="c-font-20">{{join_number}} / {{joinin_user}}</span>
-		</P>
-
-  	  </div>
-   
-	</div>
-	
-	<!-- 가격 부분 -->
-	<div class="c-product-price" id="price">
-
-		<P class="c-description">
-			<label><strong class="c-font-20">가격: </strong></label>	
-			&nbsp; <span class="c-font-18">{{price}}원</span> 
-		</P>
-
-	</div>
-
-	<!-- 주소 부분 -->
-	<div class="c-product-address" id="address">
-
-		<p class="c-description">
-			<label><strong class="c-font-20 c-font-bold">주소 : </strong></label>
-			<label><strong class="c-font-18">&nbsp;{{buytogether_address_road_address}} {{buytogether_address_detail}}</strong></label>
-			<br>
-		</p>
-		
-	</div>	
-
-	<!-- 내용 부분 -->
-	<div style="height: 190px;" class="c-product-short-desc" id="content">
-		<p class="c-description">
-			<strong class="c-font-20 c-font-bold">내용 : </strong>
-		</p>
-			<div id="contentHTML">&emsp;&emsp;&emsp;</div>
-	</div>
-	<br>
-</div>
-<!-- 프로필 부분 -->
-	<div class="row">
-		<div class="c-wrapper c-bg-blue" style="height: 150px;">
-          <div class="c-content c-border c-border-padding c-border-padding-right" style="height: 150px;">
-			<div class="c-container">
-				
-				<ul class="col-md-8 col-xs-8" style="list-style:none;">
-					<br>
-					<li>
-						<P class="c-description c-font-17 c-font-white">
-							<strong>닉네임: &nbsp {{nickname}} <strong>
-						</P> 
-					</li>
-					<li>
-						<P class="c-description c-font-17 c-font-white">
-							<strong>사냥상태: &nbsp; {{status_name}} <strong>
-						</P>
-					</li>
-					<li>
-						<P class="c-description c-font-17 c-font-white">
-							<strong>평판: &nbsp; {{reputation}} <strong>
-						</P>
-					</li>
-				</ul>
-				
-				<!-- 같이사냥 참여 버튼 -->
-				<div class="col-md-4 col-xs-4 buytogetherBtn">
-					<br><br>
-
-					 <input type="button" class="btn btn-md c-btn-white c-font-uppercase c-btn-square c-btn-border-1x buy_together_btn" data-toggle="modal" id="buy_together_btn" value="BUY TOGETHER" />
-
-		<!-- modal -->
-        	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-              	<div class="modal-dialog modal-md">
-                  	<div class="modal-content">
-                        <div class="modal-body" id="modal-body">
-                          	<p class="c-font-red" id="msg">
-								<span class="c-font-15">같이사냥에 참여 하셨습니다.</span>
-							</p>
-                        </div>
-                        <div class="modal-footer">
-                        	<button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase" data-dismiss="modal">Close</button>
-                    	</div>
-                	</div>
-            	</div>
-      		</div>
-
-			<div class="modal fade bs-example-modal-sm" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-              	<div class="modal-dialog modal-md">
-                  	<div class="modal-content">
-                        <div class="modal-body" id="modal-body">
-                          	<p class="c-font-red" id="msg">
-								<span class="c-font-15">이미 참여하셨습니다.</span>
-							</p>
-                        </div>
-                        <div class="modal-footer">
-							<button type="button" 
-								class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase"
-								data-dismiss="modal" id="cancel">취소하기</button>
-                        	<button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-bold c-btn-uppercase"
-								 data-dismiss="modal">Close</button>
-                    	</div>
-                	</div>
-            	</div>
-      		</div>
-
-
-				</div>
-			</div>
-	
-          </div>
-    	</div>
-	</div>
-</script>
 	<!--------- 전체 댓글 부분 --------->
 	<script type="text/x-handlebars-template" class="commentTemplate">
 {{#each.}}
 <div class="commentLi">
- <div class="row">                  
-   <div class="col-md-1 col-ms-2">
-       <div class="c-user-avatar">
-            
-       </div>
-   </div>
-   <div class="col-md-8 col-ms-7">
-          
+ <div class="row">
+   <div class="col-md-1 col-ms-1"></div>                 
+   <div class="col-md-8 col-ms-8">
         <br>
 		<textarea readonly="readonly" id="comment_content" rows="3" style="border: none; width:100%;" class="c-font-16"> {{comment_content}} </textarea>
-      
    </div>       
 
    <!-- 삭제 수정 버튼 -->                    
-   <div class="col-md-3 col-ms-3 c-product-rating c-right delupate" data-comment-number='{{comment_number}}'
-	 data-comment-content='{{comment_content}}' style="display:{{delupdateHelper user_number}}" >
-     
+   <div class="col-md-3 col-ms-3 c-product-rating c-right delupate" data-comment-number='{{comment_number}}' 
+		data-comment-content='{{comment_content}}' style="display:{{delupdateHelper user_number}}" >
           <input type="button" class="btn btn-xs btn-primary deleteBtn" value="삭제" />
 		  <input type="button" class="btn btn-xs btn-primary updateBtn" value="수정" id="updateBtn_a" />
-
    </div>                                
  </div>
 </div>
@@ -578,7 +579,7 @@
 <br>
 {{/each}}
 
-<!--------- 전체 댓글 쓰기 부분 ----------->
+<!--------- 댓글 부분 ----------->
 <div class="row c-product-review-input">
 
     <textarea name="comment_text" id="comment_write1"
@@ -590,23 +591,19 @@
 
 </script>
 
-	<!------- 권한 댓글 부분 --------->
+	<!------- 참여자 대화 부분 --------->
 	<script type="text/x-handlebars-template" class="commentTemplate2">
 
 {{#each.}}
 <div class="commentLi2">
- <div class="row">                           
-   <div class="col-md-1 col-ms-2">
-       <div class="c-user-avatar">
-            
-       </div>
-   </div>
-   <div class="col-md-8 col-ms-7">
-
+ <div class="row">  
+   <div class="col-md-1 col-ms-1"></div>
+  
+   <div class="col-md-8 col-ms-8">
 		<br>
-        <textarea readonly id="comment_content2" rows="3" style="border: none; width:100%;"> {{comment_content}} </textarea>
-            
-   </div>                               
+        <textarea readonly id="comment_content2" rows="3" style="border: none; width:100%;"> {{comment_content}} </textarea>   
+   </div>  
+                             
    <div class="col-md-3 col-ms-3 c-product-rating c-right delupate" id="comment_number_list"
 	 data-comment-number='{{comment_number}}' data-comment-content='{{comment_content}}' 
 	style="display:{{delupdateHelper user_number}}" >
@@ -614,7 +611,8 @@
         <input type="button" class="btn btn-xs btn-primary deleteBtn" value="삭제 " />
         <input type="button" class="btn btn-xs btn-primary updateBtn_B updateBtn" value="수정" id="updateBtn_b"/>
 
-   </div>                                 
+   </div>                
+                 
  </div>
  <div class="c-product-review-content recommentList_Btn_a" data-comment-number='{{comment_number}}'>
                                  
@@ -630,7 +628,7 @@
         <div class="recommentList_b" data-recomment-number ='{{comment_number}}'>
         
         </div>
-        <!--------- 권한 답글 쓰기 부분 ----------->
+        <!--------- 참여자 답글 쓰기  ----------->
         <textarea class="recomment_write_B" name="recomment_write_B" id="recomment_write_B" placeholder=" [주제와 무관한 답글, 악플은 삭제 될수 있습니다.]"></textarea>
         <button class="btn c-btn c-btn-square c-theme-btn c-font-bold c-font-uppercase c-font-white recommentInsertBtn" id="recommentInsertBtn">답글 달기</button>
  
@@ -642,7 +640,7 @@
 
 {{/each}}
 
-<!--------- 권한 댓글 쓰기 부분 ----------->
+<!--------- 참여자 대화 쓰기  ----------->
 <div class="row c-product-review-input">
 
     <textarea name="comment_text" id="comment_write2"
@@ -656,17 +654,19 @@
 	<script type="text/x-handlebars-template" class="recommentTemplate_B">
 {{#each.}}
 <div id="recommentLi_b">
- <div class="row">                           
-   <div class="col-md-9 col-ms-9">
-        
+ <div class="row">                
+   <div class="col-md-1 col-ms-1"></div>
+           
+   <div class="col-md-8 col-ms-8">
         <label class="c-theme-font c-font-14"><span class="glyphicon glyphicon-user"></span>{{nickname}}&nbsp;
  			{{dateHelper comment_writedate}}&nbsp;   
 		<span data-comment-number='{{comment_number}}'><a href="#" class="btn btn-default btn-xs recommentReport_btn">신고</a></span></label> </label>
 
-        <textarea readonly id="recomment_content_B" rows="3" style="border: none; width:100%;"> {{comment_content}} </textarea>
-            
-   </div>                               
-   <div class="col-md-3 col-ms-3 c-product-rating c-right delupate" id="recomment_number" data-comment-number='{{comment_number}}'
+        <textarea readonly id="recomment_content_B" rows="3" style="border: none; width:100%;"> {{comment_content}} </textarea>      
+   </div>
+                          
+   <div class="col-md-3 col-ms-3 c-product-rating c-right delupate" 
+	id="recomment_number" data-comment-number='{{comment_number}}' 
 	 data-comment-content='{{comment_content}}' style="display:{{delupdateHelper user_number}}"  >
         
         <input type="button" class="btn btn-xs btn-primary deleteBtn" value="삭제" />
@@ -678,16 +678,18 @@
 {{/each}}
 </script>
 
-	<!-- 전체 답글 리스트 -->
+	<!-- 댓글 답글 리스트 -->
 	<script type="text/x-handlebars-template" id="recommentTemplate_A">
 {{#each.}}
 
 <div id="recommentLi_a">
- <div class="row">                           
-   <div class="col-md-9 col-ms-9">
+ <div class="row">
+   <div class="col-md-1 col-ms-1"></div>
+                      
+   <div class="col-md-8 col-ms-8">
         
         <label class="c-theme-font c-font-14"><span class="glyphicon glyphicon-user"></span>{{nickname}}&nbsp;
-            {{dateHelper comment_writedate}},&nbsp;   
+            {{dateHelper comment_writedate}}&nbsp;   
 		<span data-comment-number='{{comment_number}}'><a href="#" class="btn btn-default btn-xs recommentReport_btn">신고</a></span></label> </label>
 
         <textarea readonly id="recomment_content_A" rows="3" style="border: none; width:100%;"> {{comment_content}} </textarea>
@@ -750,8 +752,7 @@
 
 	<script>
 		// 수정 삭제 히든 부분
-		/* var numberuser = sessionStorage.getItem("number"); */
-		var user_number = 10;
+		var user_number = sessionStorage.getItem("number");
 
 		Handlebars.registerHelper("delupdateHelper", function(number) {
 
