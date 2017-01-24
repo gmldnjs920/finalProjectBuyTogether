@@ -3,18 +3,21 @@ package com.buy.together.dto;
 public class LoginDTO { //같이사냥 회원 및 같이사냥 로그인을 위한 DTO
 	
 	private int user_number;
-	private String id;
+	private String email;
 	private String pw;
 	private String nickname;
+	private int level_number;
 	
 	public LoginDTO() {
 
 	}
 	
-	public LoginDTO(int user_number, String id, String pw) {
+	public LoginDTO(int user_number, String email, String pw, int level_number, String nickname) {
 		this.user_number = user_number;
-		this.id = id;
+		this.email = email;
 		this.pw = pw;
+		this.level_number = level_number;
+		this.nickname = nickname;
 	}
 
 	public int getUser_number() {
@@ -25,12 +28,12 @@ public class LoginDTO { //같이사냥 회원 및 같이사냥 로그인을 위�
 		this.user_number = user_number;
 	}
 
-	public String getId() {
-		return id;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPw() {
@@ -47,6 +50,14 @@ public class LoginDTO { //같이사냥 회원 및 같이사냥 로그인을 위�
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public int getLevel_number() {
+		return level_number;
+	}
+
+	public void setLevel_number(int level_number) {
+		this.level_number = level_number;
 	}
 	
 }

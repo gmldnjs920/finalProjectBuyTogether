@@ -33,6 +33,14 @@ public class BuyTogetherDaoImpl implements BuyTogetherDao {
 		
 	}
 	
+	//유저 관심 지역 존재여부
+	@Override 
+	public Integer userAddressDao(Integer user_number) throws Exception {
+
+		return sqlSession.selectOne(namespace+".userAddress",user_number);
+		
+	}
+	
 	//유저 관심 카테고리 갯수
 	@Override 
 	public Integer searchBuyTogetherCount(ListSearchCriteria cri) throws Exception {

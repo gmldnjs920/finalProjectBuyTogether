@@ -144,18 +144,18 @@ function loginDao() {
 	this.loginSession = function(user, loginCheckStatus) {
 
 		if(loginCheckStatus == "true") { //로그인 상태 유지하기를 체크했다면,
-			
-			localStorage.clear(); //로컬 저장소 초기화
+
 			localStorage.setItem("email", user.email);
 			localStorage.setItem("pw", user.pw);
 			localStorage.setItem("number", user.user_number);
+			localStorage.setItem("level", user.level_number);
 			
 		}
 		
-		sessionStorage.clear(); //세션 초기화
 		sessionStorage.setItem("email", user.email);
 		sessionStorage.setItem("pw", user.pw);
 		sessionStorage.setItem("number", user.user_number);
+		sessionStorage.setItem("level", user.level_number);
 
 	};
 

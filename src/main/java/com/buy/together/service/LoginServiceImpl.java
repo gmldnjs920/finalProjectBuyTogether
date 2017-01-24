@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import org.json.JSONObject;
 import org.json.XML;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.buy.together.dao.LoginDao;
 import com.buy.together.domain.User;
@@ -20,7 +20,7 @@ import com.buy.together.util.SHA256;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Repository
+@Service
 public class LoginServiceImpl implements LoginService {
 
 	@Inject
@@ -39,16 +39,14 @@ public class LoginServiceImpl implements LoginService {
 
         String shaPass = sha.getSha256(user.getPw().getBytes());
         user.setPw(shaPass);
-        
 		userLogin = loginDao.buyTogetherUserLogin(user);
+		
+		if(userLogin != null) { //로그인이 성공했다면,
 
-		if(userLogin != null) { //같이사냥 회원이 로그인 했다면,
-
-			userInfo = new LoginDTO(userLogin.getUser_number(), userLogin.getEmail(), userLogin.getPw());
-			userInfo.setNickname(userLogin.getNickname());
+			userInfo = new LoginDTO(userLogin.getUser_number(), userLogin.getEmail(), userLogin.getPw(), userLogin.getLevel_number(), userLogin.getNickname());
 			
 		}
-		
+
 		return userInfo;
 		
 	}

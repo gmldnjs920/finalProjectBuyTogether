@@ -17,6 +17,8 @@ public interface BuyTogetherDao {
 	
 	public Integer userInterestDao(Integer user_number) throws Exception;
 	
+	public Integer userAddressDao(Integer user_number) throws Exception;
+	
 	public Integer searchBuyTogetherCount(ListSearchCriteria cri) throws Exception;
 	
 	public Integer searchBuyTogetherMapCount(ListSearchCriteria cri) throws Exception;

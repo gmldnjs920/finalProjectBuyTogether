@@ -15,6 +15,7 @@ public class ListSearchCriteria extends Criteria {
 	private double swLat;
 	private double neLng;
 	private double neLat;
+	private int option;
 
 	public int getCategory_number() {
 		return category_number;
@@ -118,6 +119,14 @@ public class ListSearchCriteria extends Criteria {
 
 	public void setNeLat(double neLat) {
 		this.neLat = neLat;
+	}
+
+	public int getOption() {
+		return option;
+	}
+
+	public void setOption(int option) {
+		this.option = option;
 	}
 
 }

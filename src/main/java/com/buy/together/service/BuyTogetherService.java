@@ -15,6 +15,8 @@ public interface BuyTogetherService {
 	
 	public Integer userInterest(Integer user_number) throws Exception;
 	
+	public Integer userAddress(Integer user_number) throws Exception;
+	
 	public Integer searchBuyTogetherCount(ListSearchCriteria cri) throws Exception;
 	
 	public Integer searchBuyTogetherMapCount(ListSearchCriteria cri) throws Exception;

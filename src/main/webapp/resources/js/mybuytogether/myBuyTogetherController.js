@@ -59,9 +59,9 @@ function myBuyTogetherController() {
 	}
 	
 	//조회 클릭시
-	this.requestOpenReadBuyTogether = function(buyTogether_number){
+	this.requestOpenReadBuyTogether = function(buytogether_number){
 
-		document.location = '/buyTogether/read?buytogether_number='+buyTogether_number;
+		document.location = '/buyTogether/read?buytogether_number='+buytogether_number;
 	}
 	
 }

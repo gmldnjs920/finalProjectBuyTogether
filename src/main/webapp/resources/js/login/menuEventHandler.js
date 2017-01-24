@@ -1,31 +1,23 @@
 $(document).ready(function() {
 	
-	var returnUrl = null;
 	var sessionEmail  = sessionStorage.getItem("email"); //세선에 저장된 아이디 조회
-	var url = window.location.pathname;
-	url = url.split("?")[0];
-	
+	var url = window.location.pathname.split("?")[0];
 	
 	if(sessionEmail == null && localStorage.getItem("email") == null) { //로그인 기록이 없다면,
 
 		showLoginBtn(); //로그인, 회원가입 버튼 표시
 		
 		if(url == "/login/basicUserInfo" || url == "/user/Esignout" || url == "/user/Bsignout" || url == "/mypage"
-			|| url == "/user/myDipList" || url == "/buyTogether/write" || url == "/buyTogether/read"
+			|| url == "/user/myDipList" ||  url == "/buyTogether/read"
 			|| url == "/buyTogether/update"){
 			
 			//user_number 같이 넘겨주는 값 있을 때는 document.location 으로 바로 보낼 수 없음. returnUrl = url;
+			sessionStorage.setItem("returnUrl", window.location.pathname);
 			document.location = "/login";
 			
-		}
-		
+		}/*
+		url == "/buyTogether/write" ||*/
 	} else {
-		
-		if(returnUrl != null) {
-			
-			document.location = returnUrl;
-			
-		}
 		
 		showLogoutBtn(); //로그아웃 버튼 표시
 		
@@ -45,7 +37,6 @@ $(document).ready(function() {
 		
 		localStorage.clear();
 		sessionStorage.clear();
-		alert("logout");
 		document.location = "/";
 		
 	});
@@ -54,6 +45,21 @@ $(document).ready(function() {
 	$('#joinBtn').on("click", function(event) {
 		
 		document.location = "/user/join";
+		
+	});
+	
+	//검색아이콘 클릭 시 검색 창 보이기
+	$('.c-search-toggler-wrapper').on("click", function(event) {
+		
+		$('.c-mega-menu').css({display:'none'});
+		$('.c-quick-search').css({display:'block'});
+		
+	});
+
+	$('.c-theme-link').on("click", function(event) {
+		
+		$('.c-mega-menu').css({display:'block'});
+		$('.c-quick-search').css({display:'none'});
 		
 	});
 	

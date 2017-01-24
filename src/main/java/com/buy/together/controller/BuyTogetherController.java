@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 @RequestMapping("/buyTogether/*")
 public class BuyTogetherController {
@@ -39,7 +38,7 @@ public class BuyTogetherController {
 		System.out.println("buyTogetherController/write");
 		logger.info("Welcome home! The client locale is {}.", locale);
 
-		return "/views/buyTogether/buytogetherwrite";
+		return "/views/buyTogether/buytogetherWrite";
 	}
 
 	// 신고 팝업 
@@ -67,6 +66,6 @@ public class BuyTogetherController {
 		System.out.println("buyTogetherController/write");
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		return "/views/buyTogether/buytogetherupdate";
+		return "/views/buyTogether/buytogetherUpdate";
 	}
 }

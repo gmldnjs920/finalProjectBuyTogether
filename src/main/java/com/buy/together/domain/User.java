@@ -15,7 +15,8 @@ public class User {
    private String profile;
    private String region;
    private int reputation;
-
+   private int level_number;
+   
    public User() {
 
    }
@@ -118,5 +119,13 @@ public class User {
    public void setReputation(int reputation) {
       this.reputation = reputation;
    }
+
+	public int getLevel_number() {
+		return level_number;
+	}
+	
+	public void setLevel_number(int level_number) {
+		this.level_number = level_number;
+	}
 
 }

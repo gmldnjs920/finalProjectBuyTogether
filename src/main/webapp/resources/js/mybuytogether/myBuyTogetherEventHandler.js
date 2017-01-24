@@ -45,7 +45,7 @@ $(document).ready(function (){
 
 	//개설한 같이사냥  페이징& 개설한 같이사냥 검색페이징
 	$('#openBuyTogetherList').siblings('.c-pagination').on("click", "li a", function(event){
-		console.log("나오니?");
+
 		event.preventDefault();
 
 		var keyword = $('#keyword').val();
@@ -92,7 +92,7 @@ $(document).ready(function (){
 
 	//참여한 같이사냥 페이징
 	$('#joinBuyTogetherList').siblings('.c-pagination').on("click", "li a", function(event){
-		console.log("참여한 페이징");
+
 		event.preventDefault();
 
 		var keyword = $('#keyword').val();
@@ -139,7 +139,7 @@ $(document).ready(function (){
 
 	//완료한 같이사냥 페이징
 	$('#doneBuyTogetherList').siblings('.c-pagination').on("click", "li a", function(event){
-		console.log("완료한 페이징");
+
 		event.preventDefault();
 
 		var keyword = $('#keyword').val();

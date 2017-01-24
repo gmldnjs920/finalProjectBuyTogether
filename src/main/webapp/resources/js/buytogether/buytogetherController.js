@@ -18,6 +18,12 @@ function buytogetherController() {
 
 		return dao.listUserInterest(user_number);
 	}
+	
+	//유저의 관심지역 존재 여부 확인
+	this.requestUserAddress = function(user_number) {
+		
+		return dao.listUserAddress(user_number);
+	}
 
 	//같이사냥 목록 요청
 	this.requestListAll = function(scri) {
@@ -86,25 +92,60 @@ function buytogetherController() {
 	//카테고리 리스트 조회
 	this.requestCategoryList = function() {
 
-		dao.listCategoryDao();
+		var result = dao.listCategoryDao();
+		var str = "<option value=''>선택해주세요.</option>";
+
+		$(result).each(function() {
+
+			str += "<option value='" + this.category_number + "'>";
+			str += this.category_name+"</option>";
+
+		});
+
+		$("#category_number").html(str);
 	}
 
 	//사냥방식 리스트 조회
 	this.requestHuntingTypeList = function() {
 
-		dao.listHuntingTypeDao();
+		var result = dao.listHuntingTypeDao();
+		var str = "<option value=''>선택해주세요.</option>";
+
+		$(result).each(function() {
+
+			str += "<option value='" + this.hunting_type_number + "'>";
+			str += this.hunting_type+"</option>";
+		});
+
+		$("#hunting_type_number").html(str);
 	}
 
 	//사냥상태 리스트 조회
 	this.requestHuntingStatusList = function() {
 
-		dao.listHuntingStatusDao();
+		var result = dao.listHuntingStatusDao();
+		var str = "<option value=''>선택해주세요.</option>";
+
+		$(result).each(function() {
+
+			str += "<option value='" + this.status_number + "'>";
+			str += this.status_name+"</option>";
+		});
+
+		$("#hunting_status_number").html(str);
 	}
 
 	//첨부사진 경로 받아옴
 	this.requestPhotoPath = function(formData) {
 
-		dao.savePhotoPath(formData);
+		var data = dao.savePhotoPath(formData);
+		
+		var str="<div class='col-md-3'>";
+		str = str + "<img src='/restBuytogether/displayFile?fileName=" + data +"'/>";
+		str = str + "<div class='mailbox-attachment-info'>"+data.substr(data.indexOf("_",14)+1);
+		str = str + " <small class='btn btn-default btn-xs delbtn' data-src=" + data + ">X</small></div></div>";
+
+		$(".uploadedList").append(str);
 
 	}
 
@@ -138,8 +179,8 @@ function buytogetherController() {
 		
 		$("#title").val(data.buytogether.title);
 		if(data.buyTogetherAddress != null){
-			$("#address").val(data.buyTogetherAddress.buyTogether_address_road_address);
-			$("#address_detail").val(data.buyTogetherAddress.buyTogether_address_detail);
+			$("#address").val(data.buyTogetherAddress.buytogether_address_road_address);
+			$("#address_detail").val(data.buyTogetherAddress.buytogether_address_detail);
 		}
 		$("#duedate").val(duedate);
 		$("#join_number").val(data.buytogether.join_number);
@@ -170,7 +211,7 @@ function buytogetherController() {
 		
 		if(result == 'success') {
 			
-			window.location = '/buyTogether/read?buytogether_number=' + buytogetherUpdate.buyTogether_number;
+			window.location = '/buyTogether/read?buytogether_number=' + buytogetherUpdate.buytogether_number;
 
 		} else {
 			
@@ -280,6 +321,20 @@ function buytogetherController() {
 			
 		});
 
+	}
+	
+	//로그인 화면으로 이동
+	this.requestLogin = function() {
+		
+		document.location = '/login';
+		
+	}
+	
+	//기초 정보 입력 화면으로 이동
+	this.requestBasicUserInfo = function() {
+		
+		document.location = '/login/basicUserInfo';
+		
 	}
 	
 }

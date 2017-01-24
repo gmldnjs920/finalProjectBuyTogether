@@ -80,7 +80,7 @@ function saveFunction() {
 	$('#tx_editor_form').append(str);
 	
 	var data = $('#tx_editor_form').serializeJSON();
-	buytogetherUpdate.buyTogether_number = buytogether_number;
+	buytogetherUpdate.buytogether_number = buytogether_number;
 	buytogetherUpdate.title = data.title;
 	buytogetherUpdate.content = data.content;
 	buytogetherUpdate.duedate = data.duedate;

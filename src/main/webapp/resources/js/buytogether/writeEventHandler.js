@@ -51,9 +51,9 @@ function execDaumPostcode() {
 					
 				}
 				
-				buytogether.buyTogether_address_sido = data.sido;
-				buytogether.buyTogether_address_sigungu = data.sigungu;
-				buytogether.buyTogether_address_road_address = data.roadAddress;
+				buytogether.buytogether_address_sido = data.sido;
+				buytogether.buytogether_address_sigungu = data.sigungu;
+				buytogether.buytogether_address_road_address = data.roadAddress;
 				buytogether.longitude = longitude;
 				buytogether.latitude = latitude;
 			});
@@ -85,7 +85,7 @@ function saveFunction() {
 	buytogether.user_number = sessionStorage.getItem("number");
 	buytogether.hunting_type_number = data.hunting_type_number;
 	buytogether.path = data.files;
-	buytogether.buyTogether_address_detail = data.address_detail;
+	buytogether.buytogether_address_detail = data.address_detail;
 	
 	var controller = new buytogetherController();
 	controller.requestSaveBuyTogether(buytogether);
@@ -130,7 +130,6 @@ $(document).ready(function (){
 
 	$(".fileDrop").on("drop", function(event) {
 		event.preventDefault();
-
 
 		var files = event.originalEvent.dataTransfer.files;
 		var file;

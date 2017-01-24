@@ -60,6 +60,22 @@ public class BuyTogetherRestController {
 		}
 		return entity;
 	}
+	
+	//유저의 관심 지역 등록 여부 확인
+	@RequestMapping(value = "userAddress", method = RequestMethod.POST)
+	public ResponseEntity<Integer> requestUserAddress(int user_number) {
+
+		ResponseEntity<Integer> entity = null;
+		
+		try {
+			entity = new ResponseEntity<>(service.userAddress(user_number), HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		}
+		return entity;
+	}
 
 	@RequestMapping(value = "mapListBuyTogether", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> requestMapListBuyTogether(@RequestBody ListSearchCriteria scri) {
@@ -107,7 +123,7 @@ public class BuyTogetherRestController {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<BuyTogetherDTO> searchBuyTogether = service.searchBuyTogetherList(scri);
-			System.out.println(searchBuyTogether.size());
+
 			map.put("searchBuyTogether", searchBuyTogether);
 			map.put("pageMaker", pageMaker);
 			
@@ -182,7 +198,6 @@ public class BuyTogetherRestController {
 
 		HttpSession session = request.getSession();
 		String uploadPath = session.getServletContext().getRealPath("/") + "/resources/upload";
-		System.out.println(uploadPath);
 		
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),HttpStatus.CREATED);
 
@@ -245,10 +260,9 @@ public class BuyTogetherRestController {
 	}
 	
 	@RequestMapping(value = "write", method = RequestMethod.POST) //같이사냥 글쓰기
-	public ResponseEntity<String> RequestWriteBuyTogether(BuyTogetherUpdateDTO buytogether) {
+	public ResponseEntity<String> RequestWriteBuyTogether(@RequestBody BuyTogetherUpdateDTO buytogether) {
 
 		ResponseEntity<String> entity = null;
-		System.out.println(buytogether.getCategory_number());
 
 		try {
 			service.buyTogetherWrite(buytogether);
@@ -284,10 +298,10 @@ public class BuyTogetherRestController {
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST) //같이사냥글 수정
-	public ResponseEntity<String> RequestUpdateBuytogether(BuyTogetherUpdateDTO buytogetherUpdate) {
+	public ResponseEntity<String> RequestUpdateBuytogether(@RequestBody BuyTogetherUpdateDTO buytogetherUpdate) {
 
-		System.out.println(buytogetherUpdate.getPrice());
 		ResponseEntity<String> entity = null;
+		System.out.println(buytogetherUpdate.getBuytogether_number());
 		try {
 			service.buyTogetherUpdate(buytogetherUpdate);
 			entity = new ResponseEntity<>("success", HttpStatus.OK);

@@ -1,5 +1,6 @@
 package com.buy.together.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,6 +30,11 @@ public class BuyTogetherServiceImpl implements BuyTogetherService {
 	public Integer userInterest(Integer user_number) throws Exception {
 		return dao.userInterestDao(user_number);
 	}
+	
+	@Override //유저의 관심 지역 존재 여부 확인
+	public Integer userAddress(Integer user_number) throws Exception {
+		return dao.userAddressDao(user_number);
+	}
 
 	@Override //리스트 확인
 	public Integer searchBuyTogetherCount(ListSearchCriteria cri) throws Exception {
@@ -44,8 +50,38 @@ public class BuyTogetherServiceImpl implements BuyTogetherService {
 	@Override//사냥지도 리스트
 	public List<BuyTogetherMapDTO> searchBuyTogetherMapList(ListSearchCriteria cri) throws Exception {
 
-		List<BuyTogetherMapDTO> searchBuyTogether = dao.searchBuyTogetherMapList(cri);
+		List<BuyTogetherMapDTO> search = null;
+		List<BuyTogetherMapDTO> searchBuyTogether = new ArrayList<BuyTogetherMapDTO>();
+		String query = cri.getKeyword();
+		
+		if(query != "") {
+			
+			List<String> keyWords = new ArrayList<String>();
 
+			while(query.contains(" ")) { //문장에 공백이 포함되어있는동안,
+				
+				int index = query.indexOf(" ");
+				keyWords.add(query.substring(0,index));
+				query = query.substring(index+1);
+				
+			}
+
+			keyWords.add(query);
+			
+			for(int i=0; i<keyWords.size(); i++) {
+				
+				cri.setKeyword(keyWords.get(i).toString());
+				search = dao.searchBuyTogetherMapList(cri);
+				searchBuyTogether.addAll(search);
+				
+			}
+			
+		} else {
+			
+			searchBuyTogether = dao.searchBuyTogetherMapList(cri);
+			
+		}
+		
 		for(int i = 0; i<searchBuyTogether.size(); i++){
 
 			List<AttachedPhoto> attachedPhotos = dao.photoList(searchBuyTogether.get(i).getBuytogether_number());

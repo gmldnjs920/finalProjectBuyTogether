@@ -60,7 +60,7 @@ function loginController() {
 	};
 	
 	//로그인 상태 유지 요청
-	this.requestCheckNVLogin = function() {	
+	this.requestCheckNVLogin = function() {
 
 		$.ajax({
 			type: 'get',
@@ -83,22 +83,41 @@ function loginController() {
 	this.requestJoinin = function() {
 		
 		document.location = '/user/join';
+		
 	}
-
+	
 	//신규 회원 검사
 	function isNewUser(userInfo, loginCheckStatus) {
 
 		var result = dao.loginSession(userInfo, loginCheckStatus); //체크전 세션에 로그인정보 저장
 
-		if(userInfo.nickname == null) { //첫 로그인이라면,
-
-			document.location = "/login/basicUserInfo"; //필수 정보 입력 화면으로 이동
-
-		} else { //기존 회원이라면,
-
-			document.location = "/"; //홈으로 이동
-
+		if(userInfo.level_number != 1) { //관리자 로그인이라면,
+			
+			document.location = "/admin";
+			
+		} else { //회원 로그인이라면,
+		
+			if(userInfo.nickname == null) { //첫 로그인이라면,
+	
+				document.location = "/login/basicUserInfo"; //필수 정보 입력 화면으로 이동
+	
+			} else { //기존 회원이라면,
+				
+				if(sessionStorage.getItem("returnUrl") != "") {
+	
+					document.location = sessionStorage.getItem("returnUrl");
+					sessionStorage.setItem("returnUrl", null);
+					
+				} else {
+					
+					document.location = "/"; //홈으로 이동
+					
+				}
+	
+			}
+		
 		}
+		
 	}
 	
 }

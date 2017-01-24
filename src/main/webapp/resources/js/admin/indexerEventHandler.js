@@ -1,27 +1,18 @@
-$('head').append('<script src=\'/resources/js/buytogether/buytogetherController.js\'><\/script>');
+$('head').append('<script src=\'/resources/js/admin/indexerController.js\'><\/script>');
 
 $(document).ready(function (){
 
-	var controller = new buytogetherController();
-
-	controller.requestCategoryList();
-	controller.requestHuntingTypeList();
-	controller.requestHuntingStatusList();
+	var controller = new indexerController();
 	
-	//첫 화면(지도에 해당하는 리스트)
-	var mapChecked = 0;
-	var searchChecked = 0;
-	var keyword =  $('#keyword').val();
 	var page = 1;
 	var perPageNum = 6;
+	var user_number = sessionStorage.getItem("number");
+	
 	var scri = {
-			page : page, perPageNum : perPageNum, keyword : keyword
+			page : page, perPageNum : perPageNum, user_number : user_number
 	};
-
-	var cube = new cubphoto();
-	cube.init();
-
-	controller.requestBuyTogetherMap(scri);
+	
+	controller.requestListAll(scri);
 	
 	//검색버튼 클릭시
 	$('#search_button').click(function(){
@@ -82,12 +73,6 @@ $(document).ready(function (){
 				keyword : keyword
 		}
 		
-		controller.requestBuyTogetherMap(scri);
-		
-	});
-	
-	$('#refresh').on("click", function() {
-
 		controller.requestBuyTogetherMap(scri);
 		
 	});
